@@ -111,6 +111,9 @@ export default function RouteDetailFlow({ route }: RouteDetailFlowProps) {
       case "2": return "bg-[#009255]";
       case "3": return "bg-[#EF7C1C]";
       case "4": return "bg-[#00A5DE]";
+      case "DX": return "bg-[#D4003B]";
+      case "K": return "bg-[#77C4A3]";
+      case "SB": return "bg-[#F5A200]";
       default: return "bg-slate-500";
     }
   };

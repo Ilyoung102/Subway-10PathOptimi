@@ -23,7 +23,8 @@ const LINE_COLORS: Record<string, string> = {
   "8": "#E6186C", // 8호선
   "9": "#BDB092", // 9호선
   "DX": "#D4003B", // 신분당선
-  "K": "#77C4A3"  // 경의중앙선
+  "K": "#77C4A3",  // 경의중앙선
+  "SB": "#F5A200"  // 수인분당선
 };
 
 export default function RouteGraphicMap({ route }: RouteGraphicMapProps) {

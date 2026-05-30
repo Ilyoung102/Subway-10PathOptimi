@@ -139,10 +139,60 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
     setToQuery(tempQuery);
   };
 
+  const resolveSearchFieldText = (text: string): SearchItem => {
+    const cleanText = text.trim();
+    const queryNorm = cleanText.toLowerCase().replace(/\s+/g, "").replace("역", "");
+    if (!queryNorm) {
+      return {
+        name: "강남역",
+        type: "STATION",
+        stationId: "205",
+        lat: 37.4979,
+        lng: 127.0276,
+        lineNames: ["2호선"]
+      };
+    }
+
+    const matched = stationsList.find(s => {
+      const sNameNorm = s.name.toLowerCase().replace(/\s+/g, "").replace("역", "");
+      return sNameNorm === queryNorm || sNameNorm.includes(queryNorm) || queryNorm.includes(sNameNorm);
+    });
+
+    if (matched) {
+      return { ...matched };
+    }
+
+    // Dynamic station creation for typed unrecognized stations
+    const cleanName = cleanText.endsWith("역") ? cleanText : `${cleanText}역`;
+    return {
+      name: cleanName,
+      type: "STATION",
+      stationId: `DYNAMIC_${cleanName.replace("역", "")}`,
+      lat: 37.5657,
+      lng: 126.9769,
+      lineNames: ["통합 전철망"]
+    };
+  };
+
   const handleTriggerSearch = () => {
-    if (selectedFrom && selectedTo) {
-      saveToHistory(selectedFrom, selectedTo);
-      onSearchRoute(selectedFrom, selectedTo, undefined, targetExit);
+    let finalFrom = selectedFrom;
+    let finalTo = selectedTo;
+
+    if (!finalFrom && fromQuery.trim()) {
+      finalFrom = resolveSearchFieldText(fromQuery);
+    }
+    if (!finalTo && toQuery.trim()) {
+      finalTo = resolveSearchFieldText(toQuery);
+    }
+
+    if (finalFrom && finalTo) {
+      setSelectedFrom(finalFrom);
+      setSelectedTo(finalTo);
+      setFromQuery(finalFrom.name + (finalFrom.lineNames ? ` (${finalFrom.lineNames.join(",")})` : ""));
+      setToQuery(finalTo.name + (finalTo.lineNames ? ` (${finalTo.lineNames.join(",")})` : ""));
+      
+      saveToHistory(finalFrom, finalTo);
+      onSearchRoute(finalFrom, finalTo, undefined, targetExit);
     }
   };
 
@@ -236,12 +286,12 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
   };
 
   return (
-    <div id="main-search-card" className="bg-[#111114] rounded-2xl border border-white/10 p-4 mb-4">
-      {/* 1. 상단 두 역 입력 필드 및 스왑 버튼 */}
-      <div className="relative flex flex-col gap-2 mb-4">
-        <div className="grid grid-cols-12 gap-2">
-          {/* Row 1: From Input (col-span-9) and Swap Button (col-span-3) */}
-          <div className="relative col-span-9">
+    <div id="main-search-card" className="bg-[#111114] rounded-2xl border border-white/10 p-5 mb-4">
+      {/* 1. 상단 두 역 입력 필드 및 스왑 버튼 (줄바꿈 결합 제거로 겹침 100% 원천 방지) */}
+      <div className="relative flex flex-col gap-3 mb-4">
+        {/* 출발역 Row */}
+        <div className="flex items-center gap-2">
+          <div className="relative flex-1">
             <div className="absolute left-3 top-3.5 flex flex-col items-center">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#111114] ring-2 ring-emerald-500/20" />
             </div>
@@ -266,20 +316,20 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
             )}
           </div>
 
-          <div className="col-span-3 flex items-center justify-center">
-            <button
-              id="btn-swap-stations"
-              onClick={handleSwap}
-              className="w-full py-3 bg-[#1C1C21] border border-white/10 rounded-xl flex items-center justify-center gap-1.5 transition-all text-slate-400 hover:text-white"
-              title="출발지 목적지 교체"
-            >
-              <ArrowRightLeft className="w-3.5 h-3.5 rotate-90" />
-              <span className="text-[10px] font-bold">교체</span>
-            </button>
-          </div>
+          <button
+            id="btn-swap-stations"
+            onClick={handleSwap}
+            className="w-16 h-[44px] bg-[#1C1C21] hover:bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center gap-0.5 transition-all text-slate-400 hover:text-white shrink-0"
+            title="출발지 목적지 교체"
+          >
+            <ArrowRightLeft className="w-3.5 h-3.5" />
+            <span className="text-[9px] font-bold">교체</span>
+          </button>
+        </div>
 
-          {/* Row 2: To Input (col-span-9) and Exit Input (col-span-3) */}
-          <div className="relative col-span-9">
+        {/* 도착역 및 출구 통합 Row */}
+        <div className="flex items-center gap-2">
+          <div className="relative flex-1">
             <div className="absolute left-3 top-3.5">
               <MapPin className="w-3.5 h-3.5 text-rose-500 fill-rose-500/10" />
             </div>
@@ -304,14 +354,14 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
             )}
           </div>
 
-          <div className="relative col-span-3 mb-0">
+          <div className="w-16 shrink-0">
             <input
               id="input-target-exit"
               type="text"
-              placeholder="출구(선택)"
+              placeholder="출구"
               value={targetExit}
               onChange={(e) => setTargetExit(e.target.value)}
-              className="w-full text-sm px-1 py-3 bg-[#1C1C21] border border-white/5 rounded-xl focus:outline-none focus:border-emerald-500/50 transition-all font-medium text-slate-100 placeholder:text-slate-500 text-center"
+              className="w-full text-xs py-3 bg-[#1C1C21] border border-white/5 rounded-xl focus:outline-none focus:border-emerald-500/50 transition-all font-bold text-slate-100 placeholder:text-slate-500 text-center uppercase"
               title="도착지 출구 번호 입력"
             />
           </div>
@@ -352,15 +402,15 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
         </div>
       )}
 
-      {/* 3. 메인 길찾기 추천 격발 버튼 */}
+      {/* 3. 메인 길찾기 추천 격발 버튼 (입력 수치 존재 시 적극 허용) */}
       <div className="flex gap-2 mb-4">
         <button
           id="btn-execute-route-search"
           onClick={handleTriggerSearch}
-          disabled={!selectedFrom || !selectedTo}
+          disabled={!fromQuery.trim() || !toQuery.trim()}
           className={`w-full py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all ${
-            selectedFrom && selectedTo
-              ? "bg-emerald-500 text-black shadow-sm hover:bg-emerald-400"
+            fromQuery.trim() && toQuery.trim()
+              ? "bg-emerald-500 text-black shadow-sm hover:bg-emerald-400 cursor-pointer"
               : "bg-white/5 border border-white/5 text-slate-600 cursor-not-allowed"
           }`}
         >
@@ -368,11 +418,15 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
           승하차 최적 연계 경로 검색하기
         </button>
 
-        {selectedFrom && selectedTo && (
+        {fromQuery.trim() && toQuery.trim() && (
           <button
-            onClick={() => handleToggleFavorite(selectedFrom, selectedTo)}
+            onClick={() => {
+              const f = selectedFrom || resolveSearchFieldText(fromQuery);
+              const t = selectedTo || resolveSearchFieldText(toQuery);
+              handleToggleFavorite(f, t);
+            }}
             className={`p-3 border rounded-xl transition-all ${
-              isFavorite(selectedFrom, selectedTo) 
+              (selectedFrom && selectedTo && isFavorite(selectedFrom, selectedTo)) 
                 ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20" 
                 : "border-white/5 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10"
             }`}

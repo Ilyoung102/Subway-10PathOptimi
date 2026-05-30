@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Station, SubwayExit, DoorDetail, SubwayRoute, TransitMode, SearchItem } from "./types";
-import { STATIONS, EXITS, DOOR_DETAILS, SEARCH_PLACES, getRealtimeArrivals, resolveStation } from "./subwayData";
+import { STATIONS, EXITS, DOOR_DETAILS, SEARCH_PLACES, getRealtimeArrivals, resolveStation, findRoutes } from "./subwayData";
 
 // Components
 import MainSearch from "./components/MainSearch";
@@ -78,18 +78,31 @@ export default function App() {
 
     try {
       const resp = await fetch(`/api/subway/route?from=${fromId}&to=${toId}&mode=${mode}&exit=${exitNumber || ""}`);
-      const data = await resp.json();
-      if (resp.ok && data.routes) {
-        setRoutes(data.routes);
-        if (data.routes.length > 0) {
-          setSelectedRoute(data.routes[0]); // default select primary match
+      if (resp.ok) {
+        const data = await resp.json();
+        if (data && data.routes) {
+          setRoutes(data.routes);
+          if (data.routes.length > 0) {
+            setSelectedRoute(data.routes[0]); // default select primary match
+          }
+          return;
         }
-      } else {
-        setSearchError(data.error || "경로 탐색 요청이 반환 실패했습니다.");
       }
+      throw new Error("HTTP response or routes data is invalid");
     } catch (err) {
-      console.error("Routing error", err);
-      setSearchError("로컬 경로 탐색 시뮬레이션 지연으로, 최단 결합 엔진을 기동합니다.");
+      console.warn("Routing API fetch failed, activating fallback routing algorithm locally...", err);
+      try {
+        const localRoutes = findRoutes(fromId, toId, mode, exitNumber);
+        if (localRoutes && localRoutes.length > 0) {
+          setRoutes(localRoutes);
+          setSelectedRoute(localRoutes[0]);
+        } else {
+          setSearchError("경로 탐색 기준에 매칭되는 철도 노선을 탐색하지 못했습니다.");
+        }
+      } catch (fallbackErr) {
+        console.error("Local client-side routing fallback failed", fallbackErr);
+        setSearchError("경로 계산 및 연산 탐색 과정 도중 사소한 오류가 발생했습니다.");
+      }
     } finally {
       setIsSearching(false);
     }

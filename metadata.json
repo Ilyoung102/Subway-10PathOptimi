@@ -1,0 +1,6 @@
+{
+  "name": "지하철 최적 승하차 가이드",
+  "description": "지하철 환승 및 하차 목적지 최적화, 최단 칸과 상세출구, 교통약자/캐리어 지원 등 스마트 승하차 안내 서비스",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

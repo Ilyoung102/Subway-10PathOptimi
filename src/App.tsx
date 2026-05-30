@@ -128,7 +128,6 @@ export default function App() {
         setSelectedRoute(null);
       } else if (endStation) {
         handleCalculateRoutes(sItem, endStation, transitMode);
-        setActiveTab("SEARCH");
       }
     } else if (role === "END") {
       if (startStation && startStation.stationId === sItem.stationId) {
@@ -137,7 +136,6 @@ export default function App() {
       setEndStation(sItem);
       if (startStation && startStation.stationId !== sItem.stationId) {
         handleCalculateRoutes(startStation, sItem, transitMode);
-        setActiveTab("SEARCH");
       }
     } else {
       if (!startStation) {
@@ -146,7 +144,6 @@ export default function App() {
         setEndStation(sItem);
         // Auto trigger route
         handleCalculateRoutes(startStation, sItem, transitMode);
-        setActiveTab("SEARCH");
       } else {
         // replace start, empty end
         setStartStation(sItem);
@@ -386,6 +383,7 @@ export default function App() {
             onSelectStation={(station, role) => handleMapStationSelect(station, role)}
             onReset={handleResetSearch}
             onShowStationDetails={openStationInfoModal}
+            onSeeDetails={() => setActiveTab("SEARCH")}
           />
         )}
 

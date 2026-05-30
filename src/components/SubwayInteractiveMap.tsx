@@ -24,6 +24,7 @@ interface SubwayInteractiveMapProps {
   onSelectStation: (station: Station, role?: "START" | "END") => void;
   onReset?: () => void;
   onShowStationDetails?: (stationName: string) => void;
+  onSeeDetails?: () => void;
 }
 
 // Complete precise topological coordinates for 100% of stations
@@ -267,7 +268,8 @@ export default function SubwayInteractiveMap({
   activeRoute,
   onSelectStation,
   onReset,
-  onShowStationDetails
+  onShowStationDetails,
+  onSeeDetails
 }: SubwayInteractiveMapProps) {
   const [hoveredStation, setHoveredStation] = useState<Station | null>(null);
   const [zoomLevel, setZoomLevel] = useState<number>(1.0);
@@ -595,8 +597,67 @@ export default function SubwayInteractiveMap({
       {/* Map Drag Instructions Help Tag */}
       <div className="flex items-center gap-1.5 text-[10px] text-slate-500 pl-1">
         <Move className="w-3.5 h-3.5 text-sky-400" />
-        <span>지도가 모니터를 벗어날 시 마우스 또는 패드로 드래그하여 상하좌우 자유롭게 스크롤 이동이 가능합니다.</span>
+        <span>지도가 모니터를 벗어날 시 마우스 또는 패드로 드래그하여 상하조우 자유롭게 스크롤 이동이 가능합니다.</span>
       </div>
+
+      {activeRoute && (
+        <div className="bg-[#181822]/90 border border-emerald-500/20 shadow-[0_4px_30px_rgba(16,185,129,0.05)] rounded-xl p-4 text-xs animate-fadeIn relative overflow-hidden backdrop-blur-md">
+          {/* Neon background light effect */}
+          <div className="absolute right-0 bottom-0 w-24 h-24 bg-emerald-500/5 blur-2xl rounded-full pointer-events-none" />
+          
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-[9px] font-mono font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 px-1.5 py-0.2 rounded">
+                  최선 경로 검색완료
+                </span>
+                <h4 className="font-extrabold text-white text-sm">
+                  {activeRoute.startStationName}역 ➔ {activeRoute.endStationName}역 실시간 최적 동선
+                </h4>
+              </div>
+              
+              <div className="mt-2.5 flex flex-wrap items-center gap-y-1.5 gap-x-4 text-slate-300">
+                <div className="flex items-center gap-1">
+                  <span className="text-slate-500">소요 시간:</span>
+                  <span className="text-emerald-400 font-extrabold text-sm">{activeRoute.totalDurationMin}분</span>
+                </div>
+                <div className="h-3 w-[1px] bg-white/5" />
+                <div className="flex items-center gap-1">
+                  <span className="text-slate-500">환승:</span>
+                  <span className="text-white font-extrabold">{activeRoute.transferCount === 0 ? '직통 (환승없음)' : `환승 ${activeRoute.transferCount}회`}</span>
+                </div>
+                <div className="h-3 w-[1px] bg-white/5" />
+                <div className="flex items-center gap-1">
+                  <span className="text-slate-500">총 거리:</span>
+                  <span className="text-white font-bold">{(activeRoute.totalDistanceMeter / 1000).toFixed(1)}km</span>
+                </div>
+                <div className="h-3 w-[1px] bg-white/5" />
+                <div className="flex items-center gap-1">
+                  <span className="text-slate-500">기본 요금:</span>
+                  <span className="text-yellow-400 font-bold">{activeRoute.fare.toLocaleString()}원</span>
+                </div>
+              </div>
+
+              {/* Simple visual station summary */}
+              <p className="text-[11px] text-slate-400 mt-2 font-light flex items-center gap-1">
+                <span className="shrink-0 text-slate-500 font-normal">경로 검정 요약:</span>
+                <span className="text-slate-300 font-normal">
+                  {activeRoute.recomReason}
+                </span>
+              </p>
+            </div>
+
+            {onSeeDetails && (
+              <button
+                onClick={onSeeDetails}
+                className="px-3.5 py-2 bg-emerald-400 hover:bg-emerald-500 text-slate-900 font-extrabold rounded-lg shadow-lg hover:shadow-emerald-400/15 hover:scale-[1.02] transition-all text-[11px] shrink-0 self-start sm:self-center cursor-pointer flex items-center gap-1"
+              >
+                <span>상세 탑승 칸 / 가이드 보기 ➔</span>
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* SVG Container wrapped for panning */}
       <div 

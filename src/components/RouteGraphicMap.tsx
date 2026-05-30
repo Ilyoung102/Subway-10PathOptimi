@@ -9,6 +9,7 @@ import { Train, ArrowRightLeft, MapPin, ChevronRight, CheckCircle, HelpCircle } 
 
 interface RouteGraphicMapProps {
   route: SubwayRoute;
+  onMapClick?: () => void;
 }
 
 // Map of line codes to hex colors for official visualization
@@ -27,7 +28,7 @@ const LINE_COLORS: Record<string, string> = {
   "SB": "#F5A200"  // 수인분당선
 };
 
-export default function RouteGraphicMap({ route }: RouteGraphicMapProps) {
+export default function RouteGraphicMap({ route, onMapClick }: RouteGraphicMapProps) {
   const [showStopsIndex, setShowStopsIndex] = useState<number | null>(null);
 
   // Parse segments for display
@@ -93,7 +94,14 @@ export default function RouteGraphicMap({ route }: RouteGraphicMapProps) {
   const hasTransfers = runningStages.length > 1;
 
   return (
-    <div className="bg-[#15151A]/85 backdrop-blur-md rounded-2xl border border-white/10 p-5 mt-2 space-y-4 shadow-xl relative overflow-hidden">
+    <div 
+      onClick={onMapClick}
+      className={`bg-[#15151A]/85 backdrop-blur-md rounded-2xl border border-white/10 p-5 mt-2 space-y-4 shadow-xl relative overflow-hidden transition-all duration-300 select-none ${
+        onMapClick 
+          ? "cursor-pointer hover:border-emerald-500/40 hover:bg-[#1A1A22]/95 hover:shadow-[0_8px_30px_rgba(16,185,129,0.06)] group/gmap" 
+          : ""
+      }`}
+    >
       {/* Background glow lines matching route color */}
       <div 
         className="absolute -right-20 -top-20 w-44 h-44 rounded-full opacity-10 blur-3xl transition-all"
@@ -103,8 +111,13 @@ export default function RouteGraphicMap({ route }: RouteGraphicMapProps) {
       {/* Header */}
       <div className="flex items-center justify-between pb-2 border-b border-white/5">
         <h4 className="font-extrabold text-white text-xs flex items-center gap-1.5">
-          <Train className="w-4 h-4 text-emerald-400" />
+          <Train className="w-4 h-4 text-emerald-400 group-hover/gmap:scale-110 transition-transform" />
           <span>직관적 노선 경로 그래픽맵</span>
+          {onMapClick && (
+            <span className="text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.2 rounded font-normal opacity-80 group-hover/gmap:opacity-100 transition-opacity ml-1.5 animate-pulse">
+              터치 시 상세 지도로 이동 ↗
+            </span>
+          )}
         </h4>
         <span className="text-[9px] font-mono font-bold text-slate-400 bg-white/5 px-2 py-0.5 rounded-md border border-white/5">
           {hasTransfers ? `환승 ${runningStages.length - 1}회` : "직통 (환승 없음)"}
@@ -215,7 +228,10 @@ export default function RouteGraphicMap({ route }: RouteGraphicMapProps) {
                 <span className="text-[10px] text-slate-400">({stage.startName}역 → {stage.endName}역)</span>
               </div>
               <button 
-                onClick={() => setShowStopsIndex(showStopsIndex === idx ? null : idx)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowStopsIndex(showStopsIndex === idx ? null : idx);
+                }}
                 className="text-[10px] font-semibold text-emerald-400 hover:text-emerald-300 transition-all cursor-pointer bg-emerald-400/5 px-2 py-0.5 rounded border border-emerald-400/10"
               >
                 {stage.stopCount > 0 ? `${stage.stopCount}개역 경유 ${showStopsIndex === idx ? "접기▲" : "상세▼"}` : "직전정차"}

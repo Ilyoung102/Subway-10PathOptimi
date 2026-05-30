@@ -28,6 +28,11 @@ export const STATIONS: Station[] = [
   { id: "122", name: "성균관대", lineCode: "1", lineName: "1호선", lat: 37.3005, lng: 126.9710, stationCode: "P154" },
   { id: "123", name: "화서", lineCode: "1", lineName: "1호선", lat: 37.2842, lng: 126.9904, stationCode: "P155" },
   { id: "124", name: "금정", lineCode: "1", lineName: "1호선", lat: 37.3719, lng: 126.9434, stationCode: "P149", transferGroupId: "GEUMJEONG_GRP" },
+  { id: "125", name: "부천", lineCode: "1", lineName: "1호선", lat: 37.4842, lng: 126.7826, stationCode: "145" },
+  { id: "126", name: "송내", lineCode: "1", lineName: "1호선", lat: 37.4876, lng: 126.7533, stationCode: "150" },
+  { id: "127", name: "역곡", lineCode: "1", lineName: "1호선", lat: 37.4851, lng: 126.8115, stationCode: "146" },
+  { id: "128", name: "온수", lineCode: "1", lineName: "1호선", lat: 37.4922, lng: 126.8234, stationCode: "145", transferGroupId: "ONSU_GRP" },
+  { id: "129", name: "구로", lineCode: "1", lineName: "1호선", lat: 37.5031, lng: 126.8821, stationCode: "141" },
 
   // 수인분당선
   { id: "SB01", name: "수원", lineCode: "SB", lineName: "수인분당선", lat: 37.2659, lng: 127.0003, stationCode: "K245", transferGroupId: "SUWON_GRP" },
@@ -110,12 +115,13 @@ export const STATIONS: Station[] = [
   { id: "704", name: "논현", lineCode: "7", lineName: "7호선", lat: 37.5111, lng: 127.0215, stationCode: "732", transferGroupId: "NONHYEON_GRP" },
   { id: "705", name: "건대입구", lineCode: "7", lineName: "7호선", lat: 37.5404, lng: 127.0692, stationCode: "727", transferGroupId: "KONKUK_GRP" },
   { id: "706", name: "노원", lineCode: "7", lineName: "7호선", lat: 37.6539, lng: 127.0610, stationCode: "713" },
+  { id: "707", name: "온수", lineCode: "7", lineName: "7호선", lat: 37.4922, lng: 126.8234, stationCode: "743", transferGroupId: "ONSU_GRP" },
 
   // 8호선
   { id: "801", name: "잠실", lineCode: "8", lineName: "8호선", lat: 37.5132, lng: 127.1001, stationCode: "814", transferGroupId: "JAMSIL_GRP" },
   { id: "802", name: "석촌", lineCode: "8", lineName: "8호선", lat: 37.5054, lng: 127.1009, stationCode: "815" },
   { id: "803", name: "천호", lineCode: "8", lineName: "8호선", lat: 37.5385, lng: 127.1235, stationCode: "811", transferGroupId: "CHEONHO_GRP" },
-  { id: "804", name: "복정", lineCode: "8", lineName: "8호선", lat: 37.4700, lng: 127.1265, stationCode: "820" },
+  { id: "804", name: "복정", lineCode: "8", lineName: "8호선", lat: 37.4700, lng: 127.1265, stationCode: "820", transferGroupId: "BOKJEONG_GRP" },
 
   // 9호선
   { id: "901", name: "김포공항", lineCode: "9", lineName: "9호선", lat: 37.5618, lng: 126.8016, stationCode: "902", transferGroupId: "GIMPO_GRP" },
@@ -363,36 +369,165 @@ interface NetworkEdge {
 
 const NETWORK_EDGES: NetworkEdge[] = [
   // 1호선
-  { fromStationId: "101", toStationId: "102", durationSec: 360, distanceMeter: 5400, lineCode: "1" }, // 신도림 <-> 서울역
-  { fromStationId: "102", toStationId: "101", durationSec: 360, distanceMeter: 5400, lineCode: "1" },
-  { fromStationId: "102", toStationId: "103", durationSec: 120, distanceMeter: 1100, lineCode: "1" }, // 서울역 <-> 시청
-  { fromStationId: "103", toStationId: "102", durationSec: 120, distanceMeter: 1100, lineCode: "1" },
+  { fromStationId: "112", toStationId: "113", durationSec: 1080, distanceMeter: 14500, lineCode: "1" }, // 인천 <-> 부평
+  { fromStationId: "113", toStationId: "126", durationSec: 360, distanceMeter: 4500, lineCode: "1" },  // 부평 <-> 송내
+  { fromStationId: "126", toStationId: "125", durationSec: 300, distanceMeter: 3500, lineCode: "1" },  // 송내 <-> 부천
+  { fromStationId: "125", toStationId: "127", durationSec: 240, distanceMeter: 2800, lineCode: "1" },  // 부천 <-> 역곡
+  { fromStationId: "127", toStationId: "128", durationSec: 120, distanceMeter: 1300, lineCode: "1" },  // 역곡 <-> 온수
+  { fromStationId: "128", toStationId: "129", durationSec: 480, distanceMeter: 6000, lineCode: "1" },  // 온수 <-> 구로
+  { fromStationId: "129", toStationId: "101", durationSec: 120, distanceMeter: 1300, lineCode: "1" },  // 구로 <-> 신도림
+  { fromStationId: "101", toStationId: "109", durationSec: 120, distanceMeter: 1300, lineCode: "1" },  // 신도림 <-> 영등포
+  { fromStationId: "109", toStationId: "115", durationSec: 120, distanceMeter: 1300, lineCode: "1" },  // 영등포 <-> 신길
+  { fromStationId: "115", toStationId: "116", durationSec: 120, distanceMeter: 1300, lineCode: "1" },  // 신길 <-> 대방
+  { fromStationId: "116", toStationId: "110", durationSec: 120, distanceMeter: 1300, lineCode: "1" },  // 대방 <-> 노량진
+  { fromStationId: "110", toStationId: "108", durationSec: 180, distanceMeter: 2000, lineCode: "1" },  // 노량진 <-> 용산
+  { fromStationId: "108", toStationId: "117", durationSec: 120, distanceMeter: 1300, lineCode: "1" },  // 용산 <-> 남영
+  { fromStationId: "117", toStationId: "102", durationSec: 120, distanceMeter: 1300, lineCode: "1" },  // 남영 <-> 서울역
+  { fromStationId: "102", toStationId: "103", durationSec: 120, distanceMeter: 1100, lineCode: "1" },  // 서울역 <-> 시청
+  { fromStationId: "103", toStationId: "114", durationSec: 660, distanceMeter: 8500, lineCode: "1" },  // 시청 <-> 청량리
+  { fromStationId: "129", toStationId: "124", durationSec: 1080, distanceMeter: 14500, lineCode: "1" }, // 구로 <-> 금정 (실 가중치 대폭 상향)
+  { fromStationId: "124", toStationId: "120", durationSec: 240, distanceMeter: 2800, lineCode: "1" },  // 금정 <-> 당정
+  { fromStationId: "120", toStationId: "121", durationSec: 180, distanceMeter: 2000, lineCode: "1" },  // 당정 <-> 의왕
+  { fromStationId: "121", toStationId: "122", durationSec: 240, distanceMeter: 2800, lineCode: "1" },  // 의왕 <-> 성균관대
+  { fromStationId: "122", toStationId: "123", durationSec: 180, distanceMeter: 2000, lineCode: "1" },  // 성균관대 <-> 화서
+  { fromStationId: "123", toStationId: "111", durationSec: 180, distanceMeter: 2000, lineCode: "1" },  // 화서 <-> 수원
+  { fromStationId: "111", toStationId: "118", durationSec: 1260, distanceMeter: 17000, lineCode: "1" }, // 수원 <-> 평택
+  { fromStationId: "118", toStationId: "119", durationSec: 840, distanceMeter: 11000, lineCode: "1" }, // 평택 <-> 천안
 
-  // 2호선 순환/선형 연결
-  { fromStationId: "201", toStationId: "202", durationSec: 180, distanceMeter: 2300, lineCode: "2" }, // 신도림 <-> 홍대입구
-  { fromStationId: "202", toStationId: "201", durationSec: 180, distanceMeter: 2300, lineCode: "2" },
-  { fromStationId: "202", toStationId: "203", durationSec: 240, distanceMeter: 3100, lineCode: "2" }, // 홍대입구 <-> 시청
-  { fromStationId: "203", toStationId: "202", durationSec: 240, distanceMeter: 3100, lineCode: "2" },
-  { fromStationId: "203", toStationId: "204", durationSec: 420, distanceMeter: 6200, lineCode: "2" }, // 시청 <-> 교대
-  { fromStationId: "204", toStationId: "203", durationSec: 420, distanceMeter: 6200, lineCode: "2" },
-  { fromStationId: "204", toStationId: "205", durationSec: 120, distanceMeter: 1200, lineCode: "2" }, // 교대 <-> 강남
-  { fromStationId: "205", toStationId: "204", durationSec: 120, distanceMeter: 1200, lineCode: "2" },
-  { fromStationId: "205", toStationId: "206", durationSec: 180, distanceMeter: 3000, lineCode: "2" }, // 강남 <-> 사당
-  { fromStationId: "206", toStationId: "205", durationSec: 180, distanceMeter: 3000, lineCode: "2" },
-  { fromStationId: "206", toStationId: "201", durationSec: 300, distanceMeter: 4800, lineCode: "2" }, // 사당 <-> 신도림 (순환)
-  { fromStationId: "201", toStationId: "206", durationSec: 300, distanceMeter: 4800, lineCode: "2" },
+  // 2호선
+  { fromStationId: "203", toStationId: "211", durationSec: 1140, distanceMeter: 15000, lineCode: "2" }, // 시청 <-> 성수
+  { fromStationId: "211", toStationId: "212", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 성수 <-> 건대입구
+  { fromStationId: "212", toStationId: "207", durationSec: 360, distanceMeter: 4500, lineCode: "2" },  // 건대입구 <-> 잠실
+  { fromStationId: "207", toStationId: "213", durationSec: 360, distanceMeter: 4500, lineCode: "2" },  // 잠실 <-> 삼성
+  { fromStationId: "213", toStationId: "218", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 삼성 <-> 선릉
+  { fromStationId: "218", toStationId: "217", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 선릉 <-> 역삼
+  { fromStationId: "217", toStationId: "205", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 역삼 <-> 강남
+  { fromStationId: "205", toStationId: "204", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 강남 <-> 교대
+  { fromStationId: "204", toStationId: "214", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 교대 <-> 서초
+  { fromStationId: "214", toStationId: "215", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 서초 <-> 방배
+  { fromStationId: "215", toStationId: "206", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 방배 <-> 사당
+  { fromStationId: "206", toStationId: "216", durationSec: 660, distanceMeter: 8500, lineCode: "2" },  // 사당 <-> 대림
+  { fromStationId: "216", toStationId: "201", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 대림 <-> 신도림
+  { fromStationId: "201", toStationId: "210", durationSec: 480, distanceMeter: 6000, lineCode: "2" },  // 신도림 <-> 합정
+  { fromStationId: "210", toStationId: "202", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 합정 <-> 홍대입구
+  { fromStationId: "202", toStationId: "208", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 홍대입구 <-> 신촌
+  { fromStationId: "208", toStationId: "209", durationSec: 120, distanceMeter: 1300, lineCode: "2" },  // 신촌 <-> 이대
+  { fromStationId: "209", toStationId: "203", durationSec: 360, distanceMeter: 4500, lineCode: "2" },  // 이대 <-> 시청
 
   // 3호선
-  { fromStationId: "301", toStationId: "302", durationSec: 150, distanceMeter: 1600, lineCode: "3" }, // 교대 <-> 고속터미널
-  { fromStationId: "302", toStationId: "301", durationSec: 150, distanceMeter: 1600, lineCode: "3" },
+  { fromStationId: "311", toStationId: "303", durationSec: 120, distanceMeter: 1300, lineCode: "3" },  // 지축 <-> 삼송
+  { fromStationId: "303", toStationId: "304", durationSec: 300, distanceMeter: 3500, lineCode: "3" },  // 삼송 <-> 연신내
+  { fromStationId: "304", toStationId: "305", durationSec: 600, distanceMeter: 7800, lineCode: "3" },  // 연신내 <-> 경복궁
+  { fromStationId: "305", toStationId: "306", durationSec: 120, distanceMeter: 1300, lineCode: "3" },  // 경복궁 <-> 안국
+  { fromStationId: "306", toStationId: "310", durationSec: 120, distanceMeter: 1300, lineCode: "3" },  // 안국 <-> 종로3가
+  { fromStationId: "310", toStationId: "308", durationSec: 480, distanceMeter: 6000, lineCode: "3" },  // 종로3가 <-> 신사
+  { fromStationId: "308", toStationId: "307", durationSec: 120, distanceMeter: 1300, lineCode: "3" },  // 신사 <-> 압구정
+  { fromStationId: "307", toStationId: "302", durationSec: 240, distanceMeter: 2800, lineCode: "3" },  // 압구정 <-> 고속터미널
+  { fromStationId: "302", toStationId: "301", durationSec: 120, distanceMeter: 1300, lineCode: "3" },  // 고속터미널 <-> 교대
+  { fromStationId: "301", toStationId: "309", durationSec: 240, distanceMeter: 2800, lineCode: "3" },  // 교대 <-> 양재
+  { fromStationId: "309", toStationId: "313", durationSec: 120, distanceMeter: 1300, lineCode: "3" },  // 양재 <-> 매봉
+  { fromStationId: "313", toStationId: "314", durationSec: 120, distanceMeter: 1300, lineCode: "3" },  // 매봉 <-> 도곡
+  { fromStationId: "314", toStationId: "315", durationSec: 120, distanceMeter: 1300, lineCode: "3" },  // 도곡 <-> 대치
+  { fromStationId: "315", toStationId: "316", durationSec: 120, distanceMeter: 1300, lineCode: "3" },  // 대치 <-> 학여울
+  { fromStationId: "316", toStationId: "317", durationSec: 120, distanceMeter: 1300, lineCode: "3" },  // 학여울 <-> 대청
+  { fromStationId: "317", toStationId: "318", durationSec: 120, distanceMeter: 1300, lineCode: "3" },  // 대청 <-> 일원
+  { fromStationId: "318", toStationId: "312", durationSec: 180, distanceMeter: 2000, lineCode: "3" },  // 일원 <-> 수서
 
   // 4호선
-  { fromStationId: "401", toStationId: "402", durationSec: 480, distanceMeter: 7100, lineCode: "4" }, // 서울역 <-> 사당
-  { fromStationId: "402", toStationId: "401", durationSec: 480, distanceMeter: 7100, lineCode: "4" },
-  { fromStationId: "402", toStationId: "403", durationSec: 320, distanceMeter: 4200, lineCode: "4" }, // 사당 <-> 이촌
-  { fromStationId: "403", toStationId: "402", durationSec: 320, distanceMeter: 4200, lineCode: "4" },
-  { fromStationId: "401", toStationId: "403", durationSec: 200, distanceMeter: 2900, lineCode: "4" }, // 서울역 <-> 이촌
-  { fromStationId: "403", toStationId: "401", durationSec: 200, distanceMeter: 2900, lineCode: "4" }
+  { fromStationId: "406", toStationId: "405", durationSec: 120, distanceMeter: 1300, lineCode: "4" },  // 동대문 <-> 혜화
+  { fromStationId: "405", toStationId: "404", durationSec: 420, distanceMeter: 5200, lineCode: "4" },  // 혜화 <-> 명동
+  { fromStationId: "404", toStationId: "410", durationSec: 120, distanceMeter: 1300, lineCode: "4" },  // 명동 <-> 충무로
+  { fromStationId: "410", toStationId: "401", durationSec: 240, distanceMeter: 2800, lineCode: "4" },  // 충무로 <-> 서울역
+  { fromStationId: "401", toStationId: "407", durationSec: 240, distanceMeter: 2800, lineCode: "4" },  // 서울역 <-> 삼각지
+  { fromStationId: "407", toStationId: "403", durationSec: 120, distanceMeter: 1300, lineCode: "4" },  // 삼각지 <-> 이촌
+  { fromStationId: "403", toStationId: "408", durationSec: 240, distanceMeter: 2800, lineCode: "4" },  // 이촌 <-> 동작
+  { fromStationId: "408", toStationId: "402", durationSec: 480, distanceMeter: 6000, lineCode: "4" },  // 동작 <-> 사당
+  { fromStationId: "402", toStationId: "419", durationSec: 300, distanceMeter: 3500, lineCode: "4" },  // 사당 <-> 선바위
+  { fromStationId: "419", toStationId: "418", durationSec: 180, distanceMeter: 2000, lineCode: "4" },  // 선바위 <-> 대공원
+  { fromStationId: "418", toStationId: "417", durationSec: 180, distanceMeter: 2000, lineCode: "4" },  // 대공원 <-> 과천
+  { fromStationId: "417", toStationId: "411", durationSec: 120, distanceMeter: 1300, lineCode: "4" },  // 과천 <-> 정부과천청사
+  { fromStationId: "411", toStationId: "412", durationSec: 240, distanceMeter: 2800, lineCode: "4" },  // 정부과천청사 <-> 인덕원
+  { fromStationId: "412", toStationId: "416", durationSec: 180, distanceMeter: 2000, lineCode: "4" },  // 인덕원 <-> 평촌
+  { fromStationId: "416", toStationId: "413", durationSec: 120, distanceMeter: 1300, lineCode: "4" },  // 평촌 <-> 범계
+  { fromStationId: "413", toStationId: "414", durationSec: 180, distanceMeter: 2000, lineCode: "4" },  // 범계 <-> 금정
+  { fromStationId: "414", toStationId: "415", durationSec: 120, distanceMeter: 1300, lineCode: "4" },  // 금정 <-> 산본
+  { fromStationId: "415", toStationId: "409", durationSec: 1260, distanceMeter: 17000, lineCode: "4" }, // 산본 <-> 오이도
+
+  // 5호선
+  { fromStationId: "502", toStationId: "504", durationSec: 840, distanceMeter: 11000, lineCode: "5" }, // 까치산 <-> 공덕
+  { fromStationId: "504", toStationId: "501", durationSec: 240, distanceMeter: 2800, lineCode: "5" },  // 공덕 <-> 여의도
+  { fromStationId: "501", toStationId: "507", durationSec: 600, distanceMeter: 7800, lineCode: "5" },  // 여의도 <-> 종로3가
+  { fromStationId: "507", toStationId: "503", durationSec: 120, distanceMeter: 1300, lineCode: "5" },  // 종로3가 <-> 광화문
+  { fromStationId: "503", toStationId: "505", durationSec: 660, distanceMeter: 8500, lineCode: "5" },  // 광화문 <-> 왕십리
+  { fromStationId: "505", toStationId: "506", durationSec: 1020, distanceMeter: 13500, lineCode: "5" }, // 왕십리 <-> 천호
+
+  // 6호선
+  { fromStationId: "602", toStationId: "601", durationSec: 360, distanceMeter: 4500, lineCode: "6" },  // 디지털미디어시티 <-> 합정
+  { fromStationId: "601", toStationId: "603", durationSec: 480, distanceMeter: 6000, lineCode: "6" },  // 합정 <-> 공덕
+  { fromStationId: "603", toStationId: "604", durationSec: 360, distanceMeter: 4500, lineCode: "6" },  // 공덕 <-> 삼각지
+  { fromStationId: "604", toStationId: "606", durationSec: 480, distanceMeter: 6000, lineCode: "6" },  // 삼각지 <-> 약수
+  { fromStationId: "606", toStationId: "605", durationSec: 180, distanceMeter: 2000, lineCode: "6" },  // 약수 <-> 신당
+
+  // 7호선
+  { fromStationId: "707", toStationId: "701", durationSec: 540, distanceMeter: 7000, lineCode: "7" },  // 온수 <-> 가산디지털단지
+  { fromStationId: "701", toStationId: "702", durationSec: 180, distanceMeter: 2000, lineCode: "7" },  // 가산디지털단지 <-> 대림
+  { fromStationId: "702", toStationId: "703", durationSec: 1200, distanceMeter: 16000, lineCode: "7" }, // 대림 <-> 고속터미널 (실 왜곡률 보정)
+  { fromStationId: "703", toStationId: "704", durationSec: 240, distanceMeter: 2800, lineCode: "7" },  // 고속터미널 <-> 논현
+  { fromStationId: "704", toStationId: "705", durationSec: 660, distanceMeter: 8500, lineCode: "7" },  // 논현 <-> 건대입구
+  { fromStationId: "705", toStationId: "706", durationSec: 1380, distanceMeter: 19000, lineCode: "7" }, // 건대입구 <-> 노원
+
+  // 8호선
+  { fromStationId: "805", toStationId: "804", durationSec: 660, distanceMeter: 8500, lineCode: "8" },  // 모란 <-> 복정
+  { fromStationId: "804", toStationId: "802", durationSec: 420, distanceMeter: 5200, lineCode: "8" },  // 복정 <-> 석촌
+  { fromStationId: "802", toStationId: "801", durationSec: 120, distanceMeter: 1300, lineCode: "8" },  // 석촌 <-> 잠실
+  { fromStationId: "801", toStationId: "803", durationSec: 360, distanceMeter: 4500, lineCode: "8" },  // 잠실 <-> 천호
+
+  // 9호선
+  { fromStationId: "901", toStationId: "912", durationSec: 840, distanceMeter: 11000, lineCode: "9" }, // 김포공항 <-> 당산
+  { fromStationId: "912", toStationId: "902", durationSec: 240, distanceMeter: 2800, lineCode: "9" },  // 당산 <-> 여의도
+  { fromStationId: "902", toStationId: "903", durationSec: 120, distanceMeter: 1300, lineCode: "9" },  // 여의도 <-> 샛강
+  { fromStationId: "903", toStationId: "904", durationSec: 180, distanceMeter: 2000, lineCode: "9" },  // 샛강 <-> 노량진
+  { fromStationId: "904", toStationId: "905", durationSec: 360, distanceMeter: 4500, lineCode: "9" },  // 노량진 <-> 동작
+  { fromStationId: "905", toStationId: "906", durationSec: 360, distanceMeter: 4500, lineCode: "9" },  // 동작 <-> 고속터미널
+  { fromStationId: "906", toStationId: "907", durationSec: 180, distanceMeter: 2000, lineCode: "9" },  // 고속터미널 <-> 신논현
+  { fromStationId: "907", toStationId: "908", durationSec: 240, distanceMeter: 2800, lineCode: "9" },  // 신논현 <-> 선정릉
+  { fromStationId: "908", toStationId: "909", durationSec: 240, distanceMeter: 2800, lineCode: "9" },  // 선정릉 <-> 종합운동장
+  { fromStationId: "909", toStationId: "910", durationSec: 540, distanceMeter: 7000, lineCode: "9" },  // 종합운동장 <-> 올림픽공원
+  { fromStationId: "910", toStationId: "911", durationSec: 240, distanceMeter: 2800, lineCode: "9" },  // 올림픽공원 <-> 중앙보훈병원
+
+  // 신분당선 (DX)
+  { fromStationId: "D01", toStationId: "D02", durationSec: 120, distanceMeter: 1300, lineCode: "DX" },  // 신사 <-> 논현
+  { fromStationId: "D02", toStationId: "D03", durationSec: 120, distanceMeter: 1300, lineCode: "DX" },  // 논현 <-> 신논현
+  { fromStationId: "D03", toStationId: "D04", durationSec: 120, distanceMeter: 1300, lineCode: "DX" },  // 신논현 <-> 강남
+  { fromStationId: "D04", toStationId: "D05", durationSec: 120, distanceMeter: 1300, lineCode: "DX" },  // 강남 <-> 양재
+  { fromStationId: "D05", toStationId: "D06", durationSec: 360, distanceMeter: 4500, lineCode: "DX" },  // 양재 <-> 판교
+  { fromStationId: "D06", toStationId: "D07", durationSec: 180, distanceMeter: 2000, lineCode: "DX" },  // 판교 <-> 정자
+
+  // 경의중앙선 (K)
+  { fromStationId: "K01", toStationId: "K02", durationSec: 2700, distanceMeter: 38000, lineCode: "K" }, // 문산 <-> 디지털미디어시티
+  { fromStationId: "K02", toStationId: "K03", durationSec: 240, distanceMeter: 2800, lineCode: "K" },  // 디지털미디어시티 <-> 홍대입구
+  { fromStationId: "K03", toStationId: "K04", durationSec: 420, distanceMeter: 5200, lineCode: "K" },  // 홍대입구 <-> 용산
+  { fromStationId: "K04", toStationId: "K05", durationSec: 120, distanceMeter: 1300, lineCode: "K" },  // 용산 <-> 이촌
+  { fromStationId: "K05", toStationId: "K06", durationSec: 720, distanceMeter: 9500, lineCode: "K" },  // 이촌 <-> 왕십리
+  { fromStationId: "K06", toStationId: "K07", durationSec: 240, distanceMeter: 2800, lineCode: "K" },  // 왕십리 <-> 청량리
+  { fromStationId: "K07", toStationId: "K08", durationSec: 2700, distanceMeter: 38000, lineCode: "K" }, // 청량리 <-> 지평
+
+  // 수인분당선 (SB)
+  { fromStationId: "SB01", toStationId: "SB02", durationSec: 120, distanceMeter: 1300, lineCode: "SB" }, // 수원 <-> 매교
+  { fromStationId: "SB02", toStationId: "SB03", durationSec: 120, distanceMeter: 1300, lineCode: "SB" }, // 매교 <-> 수원시청
+  { fromStationId: "SB03", toStationId: "SB04", durationSec: 120, distanceMeter: 1300, lineCode: "SB" }, // 수원시청 <-> 매탄권선
+  { fromStationId: "SB04", toStationId: "SB05", durationSec: 180, distanceMeter: 2000, lineCode: "SB" }, // 매탄권선 <-> 망포
+  { fromStationId: "SB05", toStationId: "SB10", durationSec: 480, distanceMeter: 6000, lineCode: "SB" }, // 망포 <-> 기흥
+  { fromStationId: "SB10", toStationId: "SB11", durationSec: 360, distanceMeter: 4500, lineCode: "SB" }, // 기흥 <-> 죽전
+  { fromStationId: "SB11", toStationId: "SB13", durationSec: 240, distanceMeter: 2800, lineCode: "SB" }, // 죽전 <-> 미금
+  { fromStationId: "SB13", toStationId: "SB14", durationSec: 120, distanceMeter: 1300, lineCode: "SB" }, // 미금 <-> 정자
+  { fromStationId: "SB14", toStationId: "SB15", durationSec: 240, distanceMeter: 2800, lineCode: "SB" }, // 정자 <-> 서현
+  { fromStationId: "SB15", toStationId: "SB16", durationSec: 240, distanceMeter: 2800, lineCode: "SB" }, // 서현 <-> 야탑
+  { fromStationId: "SB16", toStationId: "SB17", durationSec: 120, distanceMeter: 1300, lineCode: "SB" }, // 야탑 <-> 모란
+  { fromStationId: "SB17", toStationId: "SB07", durationSec: 600, distanceMeter: 7800, lineCode: "SB" }, // 모란 <-> 복정
+  { fromStationId: "SB07", toStationId: "SB06", durationSec: 180, distanceMeter: 2000, lineCode: "SB" }, // 복정 <-> 수서
+  { fromStationId: "SB06", toStationId: "SB12", durationSec: 300, distanceMeter: 3500, lineCode: "SB" }, // 수서 <-> 도곡
+  { fromStationId: "SB12", toStationId: "SB08", durationSec: 240, distanceMeter: 2800, lineCode: "SB" }  // 도곡 <-> 선릉
 ];
 
 // 동일 환승 그룹 역 간의 가상 환승 엣지 (환승 이동에 소요되는 도보 거리/시간)
@@ -409,23 +544,50 @@ const TRANSFER_LINKS: Record<string, { walkTimeSec: number; distanceMeter: numbe
   "JEONGJA_GRP": { walkTimeSec: 110, distanceMeter: 125 },
   "MORAN_GRP": { walkTimeSec: 90, distanceMeter: 105 },
   "BOKJEONG_GRP": { walkTimeSec: 120, distanceMeter: 140 },
-  "SEONLEUNG_GRP": { walkTimeSec: 130, distanceMeter: 155 }
+  "SEONLEUNG_GRP": { walkTimeSec: 130, distanceMeter: 155 },
+  "ONSU_GRP": { walkTimeSec: 90, distanceMeter: 110 }
 };
 
 // 7. 실시간 전철 선형 시퀀스 및 다익스트라 경로 탐색 알고리즘
-export const LINE_SEQUENCES: Record<string, string[]> = {
-  "1": ["112", "113", "101", "109", "115", "116", "110", "108", "117", "102", "103", "114", "124", "120", "121", "122", "123", "111", "118", "119"],
-  "2": ["210", "202", "208", "209", "203", "201", "216", "206", "215", "214", "204", "205", "217", "218", "213", "207", "211", "212"],
-  "3": ["311", "303", "304", "305", "306", "310", "308", "307", "302", "301", "309", "313", "314", "315", "316", "317", "318", "312"],
-  "4": ["406", "405", "404", "410", "401", "407", "403", "408", "402", "419", "418", "417", "411", "412", "416", "413", "414", "415", "409"],
-  "5": ["502", "504", "501", "507", "503", "505", "506"],
-  "6": ["602", "601", "603", "604", "606", "605"],
-  "7": ["701", "702", "703", "704", "705", "706"],
-  "8": ["805", "804", "802", "801", "803"],
-  "9": ["901", "912", "902", "903", "904", "905", "906", "907", "908", "909", "910", "911"],
-  "DX": ["D01", "D02", "D03", "D04", "D05", "D06", "D07"],
-  "K": ["K01", "K02", "K03", "K04", "K05", "K06", "K07", "K08"],
-  "SB": ["SB01", "SB02", "SB03", "SB04", "SB05", "SB10", "SB11", "SB13", "SB14", "SB15", "SB16", "SB17", "SB07", "SB06", "SB12", "SB08"]
+export const LINE_SEQUENCES: Record<string, string[][]> = {
+  "1": [
+    ["112", "113", "126", "125", "127", "128", "129", "101"], // 인천 -> 부평 -> 송내 -> 부천 -> 역곡 -> 온수 -> 구로 -> 신도림 (인천 지선)
+    ["101", "109", "115", "116", "110", "108", "117", "102", "103", "114"], // 신도림 -> 영등포 -> 신길 -> 대방 -> 노량진 -> 용산 -> 남영 -> 서울역 -> 시청 -> 청량리 (본선)
+    ["101", "129", "124", "120", "121", "122", "123", "111", "118", "119"] // 신도림 -> 구로 -> 금정 -> 당정 -> 의왕 -> 성균관대 -> 화서 -> 수원 -> 평택 -> 천안 (수원/경부 신선)
+  ],
+  "2": [
+    ["203", "211", "212", "207", "213", "218", "217", "205", "204", "214", "215", "206", "216", "201", "210", "202", "208", "209"] // 시청부터 한 바퀴 순환
+  ],
+  "3": [
+    ["311", "303", "304", "305", "306", "310", "308", "307", "302", "301", "309", "313", "314", "315", "316", "317", "318", "312"]
+  ],
+  "4": [
+    ["406", "405", "404", "410", "401", "407", "403", "408", "402", "419", "418", "417", "411", "412", "416", "413", "414", "415", "409"]
+  ],
+  "5": [
+    ["502", "504", "501", "507", "503", "505", "506"]
+  ],
+  "6": [
+    ["602", "601", "603", "604", "606", "605"]
+  ],
+  "7": [
+    ["707", "701", "702", "703", "704", "705", "706"]
+  ],
+  "8": [
+    ["805", "804", "802", "801", "803"]
+  ],
+  "9": [
+    ["901", "912", "902", "903", "904", "905", "906", "907", "908", "909", "910", "911"]
+  ],
+  "DX": [
+    ["D01", "D02", "D03", "D04", "D05", "D06", "D07"]
+  ],
+  "K": [
+    ["K01", "K02", "K03", "K04", "K05", "K06", "K07", "K08"]
+  ],
+  "SB": [
+    ["SB01", "SB02", "SB03", "SB04", "SB05", "SB10", "SB11", "SB13", "SB14", "SB15", "SB16", "SB17", "SB07", "SB06", "SB12", "SB08"]
+  ]
 };
 
 interface GraphEdge {
@@ -465,43 +627,60 @@ function buildSubwayGraph(): Record<string, GraphEdge[]> {
   
   // 1. Add same-line track connections
   for (const lineCode in LINE_SEQUENCES) {
-    const seq = LINE_SEQUENCES[lineCode];
-    for (let i = 0; i < seq.length; i++) {
-      const uId = seq[i];
-      
-      // forward connection
-      if (i < seq.length - 1) {
-        const vId = seq[i + 1];
-        const matched = NETWORK_EDGES.find(
-          e => (e.fromStationId === uId && e.toStationId === vId && e.lineCode === lineCode) ||
-               (e.fromStationId === vId && e.toStationId === uId && e.lineCode === lineCode)
-        );
-        const durationSec = matched ? matched.durationSec : 120;
-        const distanceMeter = matched ? matched.distanceMeter : 1500;
+    const segments = LINE_SEQUENCES[lineCode];
+    for (const seq of segments) {
+      for (let i = 0; i < seq.length; i++) {
+        const uId = seq[i];
         
-        adj[uId]?.push({ toId: vId, durationSec, distanceMeter, lineCode, isTransfer: false });
-      }
-      
-      // backward connection
-      if (i > 0) {
-        const vId = seq[i - 1];
-        const matched = NETWORK_EDGES.find(
-          e => (e.fromStationId === uId && e.toStationId === vId && e.lineCode === lineCode) ||
-               (e.fromStationId === vId && e.toStationId === uId && e.lineCode === lineCode)
-        );
-        const durationSec = matched ? matched.durationSec : 120;
-        const distanceMeter = matched ? matched.distanceMeter : 1500;
+        // forward connection
+        if (i < seq.length - 1) {
+          const vId = seq[i + 1];
+          const matched = NETWORK_EDGES.find(
+            e => (e.fromStationId === uId && e.toStationId === vId && e.lineCode === lineCode) ||
+                 (e.fromStationId === vId && e.toStationId === uId && e.lineCode === lineCode)
+          );
+          const durationSec = matched ? matched.durationSec : 120;
+          const distanceMeter = matched ? matched.distanceMeter : 1500;
+          
+          const exists = adj[uId]?.some(edge => edge.toId === vId && edge.lineCode === lineCode);
+          if (!exists) {
+            adj[uId]?.push({ toId: vId, durationSec, distanceMeter, lineCode, isTransfer: false });
+          }
+        }
         
-        adj[uId]?.push({ toId: vId, durationSec, distanceMeter, lineCode, isTransfer: false });
+        // backward connection
+        if (i > 0) {
+          const vId = seq[i - 1];
+          const matched = NETWORK_EDGES.find(
+            e => (e.fromStationId === uId && e.toStationId === vId && e.lineCode === lineCode) ||
+                 (e.fromStationId === vId && e.toStationId === uId && e.lineCode === lineCode)
+          );
+          const durationSec = matched ? matched.durationSec : 120;
+          const distanceMeter = matched ? matched.distanceMeter : 1500;
+          
+          const exists = adj[uId]?.some(edge => edge.toId === vId && edge.lineCode === lineCode);
+          if (!exists) {
+            adj[uId]?.push({ toId: vId, durationSec, distanceMeter, lineCode, isTransfer: false });
+          }
+        }
       }
     }
     
     // Circular loop connection for line 2
-    if (lineCode === "2") {
+    if (lineCode === "2" && segments.length > 0) {
+      const seq = segments[0];
       const first = seq[0];
       const last = seq[seq.length - 1];
-      adj[last]?.push({ toId: first, durationSec: 180, distanceMeter: 2400, lineCode: "2", isTransfer: false });
-      adj[first]?.push({ toId: last, durationSec: 180, distanceMeter: 2400, lineCode: "2", isTransfer: false });
+      
+      const existsForward = adj[last]?.some(edge => edge.toId === first && edge.lineCode === "2");
+      if (!existsForward) {
+        adj[last]?.push({ toId: first, durationSec: 180, distanceMeter: 2400, lineCode: "2", isTransfer: false });
+      }
+      
+      const existsBackward = adj[first]?.some(edge => edge.toId === last && edge.lineCode === "2");
+      if (!existsBackward) {
+        adj[first]?.push({ toId: last, durationSec: 180, distanceMeter: 2400, lineCode: "2", isTransfer: false });
+      }
     }
   }
   
@@ -690,9 +869,10 @@ function getLineDirection(node: Station, remainingPath: PathNode[]): string {
       return nextSt.name;
     }
   }
-  const seq = LINE_SEQUENCES[node.lineCode] || [];
-  if (seq.length > 0) {
-    const lastNode = resolveStation(seq[seq.length - 1]);
+  const segments = LINE_SEQUENCES[node.lineCode] || [];
+  if (segments.length > 0) {
+    const lastSeq = segments[segments.length - 1];
+    const lastNode = resolveStation(lastSeq[lastSeq.length - 1]);
     if (lastNode) return lastNode.name;
   }
   return "종점";

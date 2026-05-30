@@ -15,6 +15,7 @@ import RouteDetailFlow from "./components/RouteDetailFlow";
 import SubwayRealtimeView from "./components/SubwayRealtimeView";
 import StationDetailModal from "./components/StationDetailModal";
 import CrowdReportingBox from "./components/CrowdReportingBox";
+import SubwayInteractiveMap from "./components/SubwayInteractiveMap";
 
 // Lucide-icons
 import { 
@@ -109,7 +110,7 @@ export default function App() {
   };
 
   // Directly select start / end from custom SVG Subway Map Click
-  const handleMapStationSelect = (station: Station) => {
+  const handleMapStationSelect = (station: Station, role?: "START" | "END") => {
     const sItem: SearchItem = {
       name: `${station.name}역`,
       type: "STATION",
@@ -119,19 +120,40 @@ export default function App() {
       lineNames: [station.lineName]
     };
 
-    if (!startStation) {
+    if (role === "START") {
       setStartStation(sItem);
-    } else if (!endStation && startStation.stationId !== sItem.stationId) {
+      if (endStation && sItem.stationId === endStation.stationId) {
+        setEndStation(null);
+        setRoutes([]);
+        setSelectedRoute(null);
+      } else if (endStation) {
+        handleCalculateRoutes(sItem, endStation, transitMode);
+        setActiveTab("SEARCH");
+      }
+    } else if (role === "END") {
+      if (startStation && startStation.stationId === sItem.stationId) {
+        setStartStation(null);
+      }
       setEndStation(sItem);
-      // Auto trigger route
-      handleCalculateRoutes(startStation, sItem, transitMode);
-      setActiveTab("SEARCH");
+      if (startStation && startStation.stationId !== sItem.stationId) {
+        handleCalculateRoutes(startStation, sItem, transitMode);
+        setActiveTab("SEARCH");
+      }
     } else {
-      // replace start, empty end
-      setStartStation(sItem);
-      setEndStation(null);
-      setRoutes([]);
-      setSelectedRoute(null);
+      if (!startStation) {
+        setStartStation(sItem);
+      } else if (!endStation && startStation.stationId !== sItem.stationId) {
+        setEndStation(sItem);
+        // Auto trigger route
+        handleCalculateRoutes(startStation, sItem, transitMode);
+        setActiveTab("SEARCH");
+      } else {
+        // replace start, empty end
+        setStartStation(sItem);
+        setEndStation(null);
+        setRoutes([]);
+        setSelectedRoute(null);
+      }
     }
   };
 
@@ -266,7 +288,25 @@ export default function App() {
             {/* Route Detail Visual Flow */}
             {selectedRoute && !isSearching && (
               <div className="space-y-3">
-                <RouteDetailFlow route={selectedRoute} />
+                {/* 직관적 노선 경로 그래픽맵 유도 배너 */}
+                <div 
+                  id="btn-shortcut-interactive-map"
+                  onClick={() => setActiveTab("MAP_VIEW")}
+                  className="p-4 bg-gradient-to-r from-emerald-500/10 to-teal-500/5 hover:from-emerald-500/15 hover:to-teal-500/10 border border-emerald-500/20 hover:border-emerald-500/35 rounded-2xl shadow-md cursor-pointer transition-all flex items-center justify-between group"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 bg-emerald-500/15 rounded-xl text-emerald-400 group-hover:scale-110 transition-transform">
+                      <Map className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="font-extrabold text-xs text-white">직관적 노선 경로 그래픽맵 확인</h4>
+                      <p className="text-[10px] text-slate-400">인터랙티브 노선 지도를 열어 전체 전철망 경로 표시 보기</p>
+                    </div>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-1 transition-transform shrink-0" />
+                </div>
+
+                <RouteDetailFlow route={selectedRoute} onGraphicClick={() => setActiveTab("MAP_VIEW")} />
                 
                 {/* Real-time details at current focus station */}
                 <SubwayRealtimeView stationName={selectedRoute.startStationName} />
@@ -323,202 +363,30 @@ export default function App() {
 
         {/* Tab 2: HTML Interactive Subway Map Node select */}
         {activeTab === "MAP_VIEW" && (
-          <div className="bg-[#111114] border border-white/10 rounded-2xl shadow-lg p-4 space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="font-extrabold text-white text-sm flex items-center gap-1.5">
-                  <Map className="w-4 h-4 text-emerald-500" />
-                  클릭 스마트 통합 전천 노선망
-                </h3>
-                <p className="text-[10px] text-slate-400 mt-0.5">역 노드를 터치하여 즉시 출발지와 목적지를 대입하세요.</p>
-              </div>
-              <Compass className="w-4 h-4 text-emerald-500 animate-spin" />
-            </div>
-
-            {/* Subway Status indicator selection header */}
-            <div className="bg-[#1C1C21] p-2.5 rounded-xl border border-white/5 flex items-center justify-between text-[11px]">
-              <div>
-                Selected Start: <strong className="text-emerald-400 font-extrabold">{startStation?.name || "미지정"}</strong>
-              </div>
-              <div className="text-slate-500">→</div>
-              <div>
-                Selected Destination: <strong className="text-rose-450 text-[#F43F5E] font-extrabold">{endStation?.name || "미지정"}</strong>
-              </div>
-            </div>
-
-            {/* Beautiful SVG Subway Map Scheme */}
-            <div className="border border-white/5 rounded-2xl bg-[#09090B] p-2 overflow-hidden relative shadow-inner">
-              
-              {/* Overlay hover tag info */}
-              {hoveredStationName && (
-                <div className="absolute top-2 left-2 z-10 bg-[#111114]/95 text-slate-100 border border-emerald-500/20 rounded-lg p-1.5 px-2.5 text-[10px] shadow-md font-bold flex items-center gap-1 animate-fadeIn">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>{hoveredStationName}역 (실시간 터치 선택)</span>
-                </div>
-              )}
-
-              <svg 
-                viewBox="50 40 400 320" 
-                className="w-full h-auto"
-                style={{ contentVisibility: "auto" }}
-              >
-                {/* 1. Grid Guidelines & Tracks */}
-                
-                {/* 2호선 Circle Track Green Loop (Gangnam - Sadang - Sindorim - Cityhall) */}
-                <path 
-                  d="M 120,240 L 120,110 L 250,110 L 380,110 L 380,240 L 250,240 Z" 
-                  fill="none" 
-                  stroke="#009255" 
-                  strokeWidth="6" 
-                  strokeLinecap="round"
-                  strokeLinejoin="round" 
-                />
-
-                {/* 4호선 Blue Slash (Seoul - Sadang - Ichon) */}
-                <path 
-                  d="M 230,60 L 380,240 L 250,310" 
-                  fill="none" 
-                  stroke="#00A5DE" 
-                  strokeWidth="6" 
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-
-                {/* 1호선 Blue Branch (Sindorim - Seoul railway) */}
-                <path 
-                  d="M 120,240 L 230,60 L 250,110" 
-                  fill="none" 
-                  stroke="#0052A4" 
-                  strokeWidth="5" 
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-
-                {/* 3호선 Orange Branch (Gyodae - Terminal) */}
-                <path 
-                  d="M 380,110 L 410,180" 
-                  fill="none" 
-                  stroke="#EF7C1C" 
-                  strokeWidth="5" 
-                  strokeLinecap="round"
-                />
-
-                {/* 2. Interactive Nodes Group mapped specifically */}
-                {/* 신도림 (2호선/1호선 환승) coords: 120, 240 */}
-                <g 
-                  className="cursor-pointer" 
-                  onClick={() => handleMapStationSelect(STATIONS.find(s => s.id === "201")!)} // 2호선 신도림
-                  onMouseEnter={() => setHoveredStationName("신도림")}
-                  onMouseLeave={() => setHoveredStationName(null)}
-                >
-                  <circle cx="120" cy="240" r="10" fill="#ffffff" stroke="#009255" strokeWidth="4" />
-                  <circle cx="120" cy="240" r="5" fill="#0052A4" />
-                  <text x="75" y="244" fill="#ffffff" fontSize="9" fontWeight="extrabold" fontFamily="sans-serif">신도림</text>
-                </g>
-
-                {/* 홍대입구 coords: 120, 110 */}
-                <g 
-                  className="cursor-pointer" 
-                  onClick={() => handleMapStationSelect(STATIONS.find(s => s.id === "202")!)}
-                  onMouseEnter={() => setHoveredStationName("홍대입구")}
-                  onMouseLeave={() => setHoveredStationName(null)}
-                >
-                  <circle cx="120" cy="110" r="8" fill="#ffffff" stroke="#009255" strokeWidth="4" />
-                  <text x="75" y="114" fill="#ffffff" fontSize="9" fontWeight="extrabold">홍대입구</text>
-                </g>
-
-                {/* 시청 (1호선/2호선 환승) coords: 250, 110 */}
-                <g 
-                  className="cursor-pointer" 
-                  onClick={() => handleMapStationSelect(STATIONS.find(s => s.id === "203")!)}
-                  onMouseEnter={() => setHoveredStationName("시청")}
-                  onMouseLeave={() => setHoveredStationName(null)}
-                >
-                  <circle cx="250" cy="110" r="10" fill="#ffffff" stroke="#009255" strokeWidth="3" />
-                  <circle cx="250" cy="110" r="4" fill="#0052A4" />
-                  <text x="240" y="98" fill="#ffffff" fontSize="9" fontWeight="extrabold">시청</text>
-                </g>
-
-                {/* 서울역 (1호선/4호선) coords: 230, 60 / 250, 60 mapped nearby */}
-                <g 
-                  className="cursor-pointer" 
-                  onClick={() => handleMapStationSelect(STATIONS.find(s => s.id === "102")!)} // 1호선 서울역
-                  onMouseEnter={() => setHoveredStationName("서울역")}
-                  onMouseLeave={() => setHoveredStationName(null)}
-                >
-                  <circle cx="230" cy="65" r="10" fill="#ffffff" stroke="#0052A4" strokeWidth="3" />
-                  <circle cx="230" cy="65" r="4" fill="#00A5DE" />
-                  <text x="190" y="68" fill="#ffffff" fontSize="9" fontWeight="extrabold">서울역</text>
-                </g>
-
-                {/* 교대 (2호선/3호선) coords: 380, 110 */}
-                <g 
-                  className="cursor-pointer" 
-                  onClick={() => handleMapStationSelect(STATIONS.find(s => s.id === "204")!)} // 2호선 교대
-                  onMouseEnter={() => setHoveredStationName("교대")}
-                  onMouseLeave={() => setHoveredStationName(null)}
-                >
-                  <circle cx="380" cy="110" r="10" fill="#ffffff" stroke="#009255" strokeWidth="3" />
-                  <circle cx="380" cy="110" r="4" fill="#EF7C1C" />
-                  <text x="395" y="114" fill="#ffffff" fontSize="9" fontWeight="extrabold">교대</text>
-                </g>
-
-                {/* 강남 (2호선) coords: 380, 180 */}
-                <g 
-                  className="cursor-pointer" 
-                  onClick={() => handleMapStationSelect(STATIONS.find(s => s.id === "205")!)}
-                  onMouseEnter={() => setHoveredStationName("강남")}
-                  onMouseLeave={() => setHoveredStationName(null)}
-                >
-                  <circle cx="380" cy="170" r="8" fill="#ffffff" stroke="#009255" strokeWidth="4" />
-                  <text x="395" y="174" fill="#ffffff" fontSize="9" fontWeight="extrabold">강남</text>
-                </g>
-
-                {/* 사당 (2호선/4호선) coords: 380, 240 */}
-                <g 
-                  className="cursor-pointer" 
-                  onClick={() => handleMapStationSelect(STATIONS.find(s => s.id === "206")!)} // 2호선 사당
-                  onMouseEnter={() => setHoveredStationName("사당")}
-                  onMouseLeave={() => setHoveredStationName(null)}
-                >
-                  <circle cx="380" cy="240" r="11" fill="#ffffff" stroke="#009255" strokeWidth="4" />
-                  <circle cx="380" cy="240" r="5" fill="#00A5DE" />
-                  <text x="395" y="244" fill="#ffffff" fontSize="9" fontWeight="extrabold">사당</text>
-                </g>
-
-                {/* 이촌 (4호선) coords: 250, 310 */}
-                <g 
-                  className="cursor-pointer" 
-                  onClick={() => handleMapStationSelect(STATIONS.find(s => s.id === "403")!)}
-                  onMouseEnter={() => setHoveredStationName("이촌")}
-                  onMouseLeave={() => setHoveredStationName(null)}
-                >
-                  <circle cx="250" cy="310" r="8" fill="#ffffff" stroke="#00A5DE" strokeWidth="4" />
-                  <text x="215" y="325" fill="#ffffff" fontSize="9" fontWeight="extrabold">이촌(박물관)</text>
-                </g>
-
-                {/* 고속터미널 coords: 410, 180 */}
-                <g 
-                  className="cursor-pointer" 
-                  onClick={() => handleMapStationSelect(STATIONS.find(s => s.id === "302")!)}
-                  onMouseEnter={() => setHoveredStationName("고속터미널")}
-                  onMouseLeave={() => setHoveredStationName(null)}
-                >
-                  <circle cx="410" cy="180" r="8" fill="#ffffff" stroke="#EF7C1C" strokeWidth="4" />
-                  <text x="422" y="184" fill="#ffffff" fontSize="8" fontWeight="bold">고속코어</text>
-                </g>
-              </svg>
-            </div>
-
-            {/* Quick guide text */}
-            <div className="bg-white/5 p-3 rounded-xl flex items-start gap-2 text-[10px] text-slate-400 leading-normal border border-white/5">
-              <Info className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-              <div>
-                <p className="font-semibold text-slate-300">노선도 클릭 길찾기 사용법:</p>
-                <p className="mt-0.5 text-slate-400">원하는 역 노드를 한 번 눌러 출발역으로 지정하고, 그 다음 도착하고자 하는 먼 역을 연달아 대입하십시오. 즉시 환승 및 안전하차 출구 계산 시그널 카드를 반환합니다.</p>
-              </div>
-            </div>
-          </div>
+          <SubwayInteractiveMap
+            startStation={startStation ? {
+              id: startStation.stationId || "",
+              name: startStation.name.replace("역", ""),
+              lineCode: "",
+              lineName: startStation.lineNames?.[0] || "",
+              lat: startStation.lat || 0,
+              lng: startStation.lng || 0,
+              stationCode: ""
+            } : null}
+            endStation={endStation ? {
+              id: endStation.stationId || "",
+              name: endStation.name.replace("역", ""),
+              lineCode: "",
+              lineName: endStation.lineNames?.[0] || "",
+              lat: endStation.lat || 0,
+              lng: endStation.lng || 0,
+              stationCode: ""
+            } : null}
+            activeRoute={selectedRoute}
+            onSelectStation={(station, role) => handleMapStationSelect(station, role)}
+            onReset={handleResetSearch}
+            onShowStationDetails={openStationInfoModal}
+          />
         )}
 
         {/* Tab 3: Reports & Crowd Sourcing signals map */}

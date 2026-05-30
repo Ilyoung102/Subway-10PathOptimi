@@ -14,9 +14,10 @@ import RouteGraphicMap from "./RouteGraphicMap";
 
 interface RouteDetailFlowProps {
   route: SubwayRoute;
+  onGraphicClick?: () => void;
 }
 
-export default function RouteDetailFlow({ route }: RouteDetailFlowProps) {
+export default function RouteDetailFlow({ route, onGraphicClick }: RouteDetailFlowProps) {
   const [expandedSegmentIdx, setExpandedSegmentIdx] = useState<number[]>(
     route.segments.map((_, i) => i) // Default expand all for scannability
   );
@@ -135,7 +136,7 @@ export default function RouteDetailFlow({ route }: RouteDetailFlowProps) {
 
       {/* Graphical Route Map Visualizer */}
       <div className="mb-5">
-        <RouteGraphicMap route={route} />
+        <RouteGraphicMap route={route} onMapClick={onGraphicClick} />
       </div>
 
       {/* 1. 도보 연결 입구 진입 가이드 */}

@@ -138,7 +138,7 @@ export const STATIONS: Station[] = [
   { id: "D04", name: "강남", lineCode: "DX", lineName: "신분당선", lat: 37.497952, lng: 127.027619, stationCode: "D04", transferGroupId: "GANGNAM_GRP" },
   { id: "D05", name: "양재", lineCode: "DX", lineName: "신분당선", lat: 37.4841, lng: 127.0347, stationCode: "D05", transferGroupId: "YANGJAE_GRP" },
   { id: "D06", name: "판교", lineCode: "DX", lineName: "신분당선", lat: 37.3947, lng: 127.1112, stationCode: "D11" },
-  { id: "D07", name: "정자", lineCode: "DX", lineName: "신분당선", lat: 37.3674, lng: 127.1082, stationCode: "D12" },
+  { id: "D07", name: "정자", lineCode: "DX", lineName: "신분당선", lat: 37.3674, lng: 127.1082, stationCode: "D12", transferGroupId: "JEONGJA_GRP" },
 
   // 경의중앙선 (K)
   { id: "K01", name: "문산", lineCode: "K", lineName: "경의중앙선", lat: 37.8546, lng: 126.7884, stationCode: "K335" },
@@ -148,7 +148,38 @@ export const STATIONS: Station[] = [
   { id: "K05", name: "이촌", lineCode: "K", lineName: "경의중앙선", lat: 37.522271, lng: 126.973399, stationCode: "K111", transferGroupId: "ICHON_GRP" },
   { id: "K06", name: "왕십리", lineCode: "K", lineName: "경의중앙선", lat: 37.5612, lng: 127.0382, stationCode: "K116", transferGroupId: "WANGSIM_GRP" },
   { id: "K07", name: "청량리", lineCode: "K", lineName: "경의중앙선", lat: 37.5801, lng: 127.0449, stationCode: "K117", transferGroupId: "CHEONGRYANG_GRP" },
-  { id: "K08", name: "지평", lineCode: "K", lineName: "경의중앙선", lat: 37.4764, lng: 127.6402, stationCode: "K138" }
+  { id: "K08", name: "지평", lineCode: "K", lineName: "경의중앙선", lat: 37.4764, lng: 127.6402, stationCode: "K138" },
+
+  // 3호선 연장역
+  { id: "312", name: "수서", lineCode: "3", lineName: "3호선", lat: 37.4874, lng: 127.1014, stationCode: "349", transferGroupId: "SUSEO_GRP" },
+  { id: "313", name: "매봉", lineCode: "3", lineName: "3호선", lat: 37.4869, lng: 127.0462, stationCode: "343" },
+  { id: "314", name: "도곡", lineCode: "3", lineName: "3호선", lat: 37.4909, lng: 127.0553, stationCode: "344", transferGroupId: "DOGOK_GRP" },
+  { id: "315", name: "대치", lineCode: "3", lineName: "3호선", lat: 37.4946, lng: 127.0632, stationCode: "345" },
+  { id: "316", name: "학여울", lineCode: "3", lineName: "3호선", lat: 37.4966, lng: 127.0707, stationCode: "346" },
+  { id: "317", name: "대청", lineCode: "3", lineName: "3호선", lat: 37.4939, lng: 127.0795, stationCode: "347" },
+  { id: "318", name: "일원", lineCode: "3", lineName: "3호선", lat: 37.4837, lng: 127.0843, stationCode: "348" },
+
+  // 수인분당선 연장역
+  { id: "SB06", name: "수서", lineCode: "SB", lineName: "수인분당선", lat: 37.4874, lng: 127.1014, stationCode: "K221", transferGroupId: "SUSEO_GRP" },
+  { id: "SB07", name: "복정", lineCode: "SB", lineName: "수인분당선", lat: 37.4700, lng: 127.1265, stationCode: "K222", transferGroupId: "BOKJEONG_GRP" },
+  { id: "SB08", name: "선릉", lineCode: "SB", lineName: "수인분당선", lat: 37.5045, lng: 127.0490, stationCode: "K215", transferGroupId: "SEONLEUNG_GRP" },
+  { id: "SB10", name: "기흥", lineCode: "SB", lineName: "수인분당선", lat: 37.2755, lng: 127.1159, stationCode: "K237" },
+  { id: "SB11", name: "죽전", lineCode: "SB", lineName: "수인분당선", lat: 37.3248, lng: 127.1165, stationCode: "K233" },
+  { id: "SB12", name: "도곡", lineCode: "SB", lineName: "수인분당선", lat: 37.4909, lng: 127.0553, stationCode: "K217", transferGroupId: "DOGOK_GRP" },
+  { id: "SB13", name: "미금", lineCode: "SB", lineName: "수인분당선", lat: 37.3499, lng: 127.1089, stationCode: "K230" },
+  { id: "SB14", name: "정자", lineCode: "SB", lineName: "수인분당선", lat: 37.3674, lng: 127.1082, stationCode: "K229", transferGroupId: "JEONGJA_GRP" },
+  { id: "SB15", name: "서현", lineCode: "SB", lineName: "수인분당선", lat: 37.3851, lng: 127.1214, stationCode: "K227" },
+  { id: "SB16", name: "야탑", lineCode: "SB", lineName: "수인분당선", lat: 37.4111, lng: 127.1286, stationCode: "K225" },
+  { id: "SB17", name: "모란", lineCode: "SB", lineName: "수인분당선", lat: 37.4321, lng: 127.1299, stationCode: "K223", transferGroupId: "MORAN_GRP" },
+
+  // 4호선 과천선 연장역
+  { id: "416", name: "평촌", lineCode: "4", lineName: "4호선", lat: 37.3943, lng: 126.9639, stationCode: "441" },
+  { id: "417", name: "과천", lineCode: "4", lineName: "4호선", lat: 37.4338, lng: 126.9961, stationCode: "438" },
+  { id: "418", name: "대공원", lineCode: "4", lineName: "4호선", lat: 37.4443, lng: 127.0142, stationCode: "437" },
+  { id: "419", name: "선바위", lineCode: "4", lineName: "4호선", lat: 37.4517, lng: 127.0019, stationCode: "435" },
+
+  // 8호선 모란 연장역
+  { id: "805", name: "모란", lineCode: "8", lineName: "8호선", lat: 37.4321, lng: 127.1299, stationCode: "826", transferGroupId: "MORAN_GRP" }
 ];
 
 // 임의의 동적 역 객체를 즉시 생성하고 조회할 수 있도록 지원하는 역 해석기
@@ -372,23 +403,29 @@ const TRANSFER_LINKS: Record<string, { walkTimeSec: number; distanceMeter: numbe
   "GYODAE_GRP": { walkTimeSec: 90, distanceMeter: 110 },
   "SADANG_GRP": { walkTimeSec: 100, distanceMeter: 120 },
   "SUWON_GRP": { walkTimeSec: 140, distanceMeter: 180 },
-  "GEUMJEONG_GRP": { walkTimeSec: 30, distanceMeter: 40 }
+  "GEUMJEONG_GRP": { walkTimeSec: 30, distanceMeter: 40 },
+  "SUSEO_GRP": { walkTimeSec: 120, distanceMeter: 145 },
+  "DOGOK_GRP": { walkTimeSec: 100, distanceMeter: 115 },
+  "JEONGJA_GRP": { walkTimeSec: 110, distanceMeter: 125 },
+  "MORAN_GRP": { walkTimeSec: 90, distanceMeter: 105 },
+  "BOKJEONG_GRP": { walkTimeSec: 120, distanceMeter: 140 },
+  "SEONLEUNG_GRP": { walkTimeSec: 130, distanceMeter: 155 }
 };
 
 // 7. 실시간 전철 선형 시퀀스 및 다익스트라 경로 탐색 알고리즘
 export const LINE_SEQUENCES: Record<string, string[]> = {
   "1": ["112", "113", "101", "109", "115", "116", "110", "108", "117", "102", "103", "114", "124", "120", "121", "122", "123", "111", "118", "119"],
   "2": ["210", "202", "208", "209", "203", "201", "216", "206", "215", "214", "204", "205", "217", "218", "213", "207", "211", "212"],
-  "3": ["311", "303", "304", "305", "306", "310", "308", "307", "302", "301", "309"],
-  "4": ["406", "405", "404", "410", "401", "407", "403", "408", "402", "411", "412", "413", "414", "415", "409"],
+  "3": ["311", "303", "304", "305", "306", "310", "308", "307", "302", "301", "309", "313", "314", "315", "316", "317", "318", "312"],
+  "4": ["406", "405", "404", "410", "401", "407", "403", "408", "402", "419", "418", "417", "411", "412", "416", "413", "414", "415", "409"],
   "5": ["502", "504", "501", "507", "503", "505", "506"],
   "6": ["602", "601", "603", "604", "606", "605"],
   "7": ["701", "702", "703", "704", "705", "706"],
-  "8": ["804", "802", "801", "803"],
+  "8": ["805", "804", "802", "801", "803"],
   "9": ["901", "912", "902", "903", "904", "905", "906", "907", "908", "909", "910", "911"],
   "DX": ["D01", "D02", "D03", "D04", "D05", "D06", "D07"],
   "K": ["K01", "K02", "K03", "K04", "K05", "K06", "K07", "K08"],
-  "SB": ["SB01", "SB02", "SB03", "SB04", "SB05"]
+  "SB": ["SB01", "SB02", "SB03", "SB04", "SB05", "SB10", "SB11", "SB13", "SB14", "SB15", "SB16", "SB17", "SB07", "SB06", "SB12", "SB08"]
 };
 
 interface GraphEdge {

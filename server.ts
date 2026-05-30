@@ -165,16 +165,12 @@ async function startServer() {
       - "LEAST_WALK" (최소 도보)
       - "FEW_TRANSFERS" (최소 환승)
       - "EASY_ACCESS" (교통약자/휠체어/오르내림 불편)
-      - "LUGGAGE_MODE" (무거운 캐리어/짐 보유)
-      - "RAINY_MODE" (비 오는 날 지하 연결 우선)
-      - "CROWD_AVOID" (출퇴근 혼잡 회피)
-      - "LAST_TRAIN_SAFE" (막차 시간 확보)
 
       다음 스키마 규격을 충족하는 JSON 포맷만 반환하세요:
       {
         "origin": string (예: "강남" 또는 "사당" 등),
         "destination": string (예: "서울" 또는 "박물관" 등),
-        "mode": "FASTEST" | "LEAST_WALK" | "FEW_TRANSFERS" | "EASY_ACCESS" | "LUGGAGE_MODE" | "RAINY_MODE" | "CROWD_AVOID" | "LAST_TRAIN_SAFE",
+        "mode": "FASTEST" | "LEAST_WALK" | "FEW_TRANSFERS" | "EASY_ACCESS",
         "hasLuggage": boolean,
         "isVulnerable": boolean,
         "isRainy": boolean,
@@ -216,18 +212,10 @@ async function startServer() {
       
       if (msgNorm.includes("교통약자") || msgNorm.includes("휠체어") || msgNorm.includes("유모차") || msgNorm.includes("불편")) {
         mode = "EASY_ACCESS";
-      } else if (msgNorm.includes("짐") || msgNorm.includes("캐리어") || msgNorm.includes("공항") || msgNorm.includes("가방")) {
-        mode = "LUGGAGE_MODE";
-      } else if (msgNorm.includes("비") || msgNorm.includes("우산") || msgNorm.includes("레인") || msgNorm.includes("비가")) {
-        mode = "RAINY_MODE";
-      } else if (msgNorm.includes("자리") || msgNorm.includes("혼잡") || msgNorm.includes("붐비")) {
-        mode = "CROWD_AVOID";
       } else if (msgNorm.includes("걷기") || msgNorm.includes("적게") || msgNorm.includes("걸을")) {
         mode = "LEAST_WALK";
       } else if (msgNorm.includes("환승") || msgNorm.includes("귀찮")) {
         mode = "FEW_TRANSFERS";
-      } else if (msgNorm.includes("막차") || msgNorm.includes("놓치")) {
-        mode = "LAST_TRAIN_SAFE";
       }
 
       if (msgNorm.includes("홍대")) origin = "홍대입구";
@@ -239,9 +227,9 @@ async function startServer() {
           origin,
           destination,
           mode,
-          hasLuggage: mode === "LUGGAGE_MODE",
+          hasLuggage: false,
           isVulnerable: mode === "EASY_ACCESS",
-          isRainy: mode === "RAINY_MODE",
+          isRainy: false,
           explanation: "자연어 규칙 분석기 fallback을 통해 최적 검색 모드와 위치를 자동 추출했습니다."
         }
       });

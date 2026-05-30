@@ -53,38 +53,6 @@ const MODES: ModeOption[] = [
     icon: Accessibility,
     color: "from-pink-500 to-rose-600",
     badge: "안전"
-  },
-  {
-    value: "LUGGAGE_MODE",
-    label: "캐리어/유모차 모드",
-    desc: "계단 없이 에스컬레이터와 엘리베이터 승하차 연계",
-    icon: Sparkles,
-    color: "from-amber-500 to-orange-600",
-    badge: "추천"
-  },
-  {
-    value: "RAINY_MODE",
-    label: "비 오는 날 모드",
-    desc: "지상 노출 및 출구 외부 도보를 막고 실내 지하상가 연계",
-    icon: Umbrella,
-    color: "from-sky-500 to-cyan-600",
-    badge: "지하"
-  },
-  {
-    value: "CROWD_AVOID",
-    label: "혼잡 회피 모드",
-    desc: "출퇴근길에 붐비는 환승 칸 대신 여유로운 탑승문 추천",
-    icon: ShieldAlert,
-    color: "from-amber-600 to-red-600",
-    badge: "쾌적"
-  },
-  {
-    value: "LAST_TRAIN_SAFE",
-    label: "막차 안심 코스",
-    desc: "환승 대기 리스크가 높은 노선을 피해 버스 연계 대비",
-    icon: AlertTriangle,
-    color: "from-red-500 to-slate-800",
-    badge: "안심"
   }
 ];
 

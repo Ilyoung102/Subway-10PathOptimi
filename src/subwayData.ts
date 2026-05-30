@@ -294,11 +294,11 @@ export const SEARCH_PLACES: SearchItem[] = [
     lineNames: [s.lineName]
   })),
   // 특정 대리 장소들
-  { name: "국립중앙박물관", type: "PLACE", lat: 37.523984, lng: 126.979774 },
-  { name: "강남 카카오프렌즈샵", type: "PLACE", lat: 37.4996, lng: 127.0272 },
-  { name: "삼성세무서", type: "PLACE", lat: 37.49845, lng: 127.0286 },
-  { name: "서울스퀘어", type: "PLACE", lat: 37.5539, lng: 126.9739 },
-  { name: "숭례문", type: "PLACE", lat: 37.5598, lng: 126.9753 }
+  { name: "국립중앙박물관", type: "PLACE", lat: 37.523984, lng: 126.979774, stationId: "403" }, // 이촌역 인근
+  { name: "강남 카카오프렌즈샵", type: "PLACE", lat: 37.4996, lng: 127.0272, stationId: "205" }, // 강남역 인근
+  { name: "삼성세무서", type: "PLACE", lat: 37.49845, lng: 127.0286, stationId: "217" }, // 역삼역 인근
+  { name: "서울스퀘어", type: "PLACE", lat: 37.5539, lng: 126.9739, stationId: "401" }, // 서울역 인근
+  { name: "숭례문", type: "PLACE", lat: 37.5598, lng: 126.9753, stationId: "401" } // 서울역 인근
 ];
 
 // Ota보정(음성, 타자 실수)용 간단 오소그래피 맵퍼
@@ -565,8 +565,6 @@ function solveSubwayDijkstra(
           penalty += 500;
         } else if (mode === "EASY_ACCESS") {
           penalty += 350;
-        } else if (mode === "LUGGAGE_MODE") {
-          penalty += 300;
         } else {
           penalty += 120;
         }
@@ -1192,8 +1190,6 @@ function buildSimulatedRoute(
   const warnings: string[] = [];
   if (mode === "EASY_ACCESS") {
     warnings.push("교통약자 특수 권고 적용: 엘리베이터 이동 시설 풀 브리핑 우선 안내 모드");
-  } else if (mode === "LUGGAGE_MODE") {
-    warnings.push("캐리어 동선 보정: 계단 회동 에스컬레이터 상시 정렬 궤적");
   }
 
   return {

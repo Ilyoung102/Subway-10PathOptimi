@@ -25,11 +25,7 @@ export type TransitMode =
   | "FASTEST"        // 가장 빠른 경로
   | "LEAST_WALK"     // 가장 적게 걷는 경로
   | "FEW_TRANSFERS"  // 환승이 적은 경로
-  | "EASY_ACCESS"    // 교통약자(휠체어/유모차) 경로 (엘리베이터 우선)
-  | "LUGGAGE_MODE"   // 캐리어/짐 모드 (에스컬레이터 + 엘리베이터 우선)
-  | "RAINY_MODE"     // 비 오는 날 모드 (지하 연결 통로 우선)
-  | "CROWD_AVOID"    // 혼잡 회피 경로
-  | "LAST_TRAIN_SAFE"// 막차 안전 경로
+  | "EASY_ACCESS";   // 교통약자(휠체어/유모차) 경로 (엘리베이터 우선)
 
 export interface Platform {
   stationId: string;

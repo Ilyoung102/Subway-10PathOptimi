@@ -54,12 +54,19 @@ export default function App() {
     let toId = to.stationId;
 
     if (!fromId) {
-      // Find matching STATION item nearby
-      const match = STATIONS.find(s => s.name.startsWith(from.name) || from.name.startsWith(s.name));
+      const cleanFromName = from.name.replace("역", "").trim();
+      let match = STATIONS.find(s => s.name === cleanFromName);
+      if (!match) {
+        match = STATIONS.find(s => s.name.startsWith(cleanFromName) || cleanFromName.startsWith(s.name));
+      }
       fromId = match ? match.id : "205"; // fallback to 강남
     }
     if (!toId) {
-      const match = STATIONS.find(s => s.name.startsWith(to.name) || to.name.startsWith(s.name));
+      const cleanToName = to.name.replace("역", "").trim();
+      let match = STATIONS.find(s => s.name === cleanToName);
+      if (!match) {
+        match = STATIONS.find(s => s.name.startsWith(cleanToName) || cleanToName.startsWith(s.name));
+      }
       toId = match ? match.id : "401"; // fallback to 서울역
     }
 

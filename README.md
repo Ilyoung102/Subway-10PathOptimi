@@ -1,20 +1,49 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# 🚇 수도권 지하철 스마트 경로 최적화 시스템 (Subway Routing Engine)
 
-# Run and deploy your AI Studio app
+수도권 광역 전철망 데이터를 기반으로 사용자의 다양한 승하차 필요 조건에 부합하는 대안 경로 및 연계 시설 최적화를 연산하는 지능형 풀스택 경로 가이드 시스템입니다.
 
-This contains everything you need to run your app locally.
+---
 
-View your app in AI Studio: https://ai.studio/apps/e5e276d1-35d0-4dc1-995d-d42ea520f35b
+## 🎨 주요 구현 및 기획 특징
 
-## Run Locally
+### 1. 고정밀 다익스트라(Dijkstra) 경로 탐색 모델
+* 수도권 주요 노선(1호선, 2호선, 3호선, 4호선, 수인분당선, 신분당선 등)에 대한 정밀 노선 시퀀스와 실제 거리를 기반으로 노드-에지 가중치 그래프를 구축합니다.
+* 노선 간 환승 링크 정보(`transferGroupId`)를 정밀 맵핑하여 환승 소요 시간 및 도보 거리가 경로 계산에 엄밀하게 동기화됩니다.
 
-**Prerequisites:**  Node.js
+### 2. 가중치 보정 기반 다앙한 탐색 모드 (Active Mode)
+* **가장 빠른 경로 (`FASTEST`)**: 순수 소요 시간 및 환승 시간을 기준으로 가장 신속하게 목적지에 진입하는 코스입니다.
+* **적게 걷는 경로 (`LEAST_WALK`)**: 환승 구간 도보 에지에 최대 시간 가중치를 부가하여 보도를 배제하고 순수 대중교통 탑승 비율을 상향합니다.
+* **환승 최소 경로 (`FEW_TRANSFERS`)**: 환승 페널티를 대폭 상향하여 이동거리가 조금 길어지더라도 승하차 횟수 자체를 최소화한 쾌적한 코스를 추천합니다.
+* **교통약자 모드 (`EASY_ACCESS`)**: 계단을 배제하고 엘리베이터 및 휠체어 전용 경사로가 확보된 승강구 정보를 최우선 브리핑하도록 설계되었습니다.
 
+### 3. 정적/동적 검색어 오타 및 유사 교정 최적화
+* 역 한 단어 또는 오타("수원", "사당", "간남" 등) 입력 시 완전 일치 및 정방향 접두사(Prefix) 매칭을 최우선으로 정밀 처리하여, 유사한 서브스트링("수원시청" 입력 시 앞 글자가 겹치는 "수원역"으로 잘못 수렴하는 문제 등)으로 인해 목적지가 오분류되는 심각한 오류를 극적으로 수정하였습니다.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### 4. 클라이언트 전용 편의 UI 강화
+* **최근 경로 기록 및 Clean 기능**: 사용자가 검색한 최근 최적 경로 로그 리스트를 저장하고, 한 번에 초기화할 수 있는 강력한 개별 `Clear` 아이콘 버튼 기능을 연동했습니다.
+* **실시간 도크 배치 가이드**: 각 주요 역사의 환승 및 출구 최단 거리 도킹 칸(예: 사당역 2-2호차 등)을 정교하게 제시합니다.
+
+---
+
+## 🏗️ 시스템 구성도 및 디렉토리 구조
+
+* `/server.ts`: Express.js 프록시 및 백엔드 라우팅 서비스 (AI 분석 & 최적화 연산자 연동)
+* `/src/subwayData.ts`: 전철 제어 엔진의 핵심. 네트워크 빌더, 다익스트라 엔진 코어, 요금 환산 기능 탑재
+* `/src/App.tsx`: 종합 경로 프리젠테이션 대시보드 조율 및 상태 제어 매니저
+* `/src/components/MainSearch.tsx`: 최근 탐색, 오타 교정, 즐겨찾기, AI 검색 수립 인터페이스
+* `/src/components/VulnerableWidget.tsx`: 추천 필터 조율을 위한 고대비 직관 보정 바
+
+---
+
+## 🏃‍♂️ 실행 및 빌드 방법
+
+### 1. 개발 서버 기동
+```bash
+npm run dev
+```
+
+### 2. 빌드 및 프로덕션 배포
+```bash
+npm run build
+npm run start
+```

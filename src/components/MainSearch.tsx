@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from "react";
 import { SearchItem, TransitMode } from "../types";
-import { Search, MapPin, Star, History, Mic, MicOff, HelpCircle, ArrowRightLeft, Sparkles, Check, AlertCircle, X } from "lucide-react";
+import { Search, MapPin, Star, History, Mic, MicOff, HelpCircle, ArrowRightLeft, Sparkles, Check, AlertCircle, X, Trash2 } from "lucide-react";
 
 interface MainSearchProps {
   onSearchRoute: (from: SearchItem, to: SearchItem, mode?: TransitMode, exitNumber?: string) => void;
@@ -48,6 +48,12 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
     const fresh = [{ from, to }, ...recentSearches.filter(i => !(i.from.name === from.name && i.to.name === to.name))].slice(0, 5);
     setRecentSearches(fresh);
     localStorage.setItem("subway_search_history", JSON.stringify(fresh));
+  };
+
+  const handleClearHistory = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setRecentSearches([]);
+    localStorage.removeItem("subway_search_history");
   };
 
   const handleToggleFavorite = (from: SearchItem, to: SearchItem) => {
@@ -153,10 +159,24 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
       };
     }
 
-    const matched = stationsList.find(s => {
+    let matched = stationsList.find(s => {
       const sNameNorm = s.name.toLowerCase().replace(/\s+/g, "").replace("역", "");
-      return sNameNorm === queryNorm || sNameNorm.includes(queryNorm) || queryNorm.includes(sNameNorm);
+      return sNameNorm === queryNorm;
     });
+
+    if (!matched) {
+      matched = stationsList.find(s => {
+        const sNameNorm = s.name.toLowerCase().replace(/\s+/g, "").replace("역", "");
+        return sNameNorm.startsWith(queryNorm);
+      });
+    }
+
+    if (!matched) {
+      matched = stationsList.find(s => {
+        const sNameNorm = s.name.toLowerCase().replace(/\s+/g, "").replace("역", "");
+        return sNameNorm.includes(queryNorm) || queryNorm.includes(sNameNorm);
+      });
+    }
 
     if (matched) {
       return { ...matched };
@@ -510,9 +530,20 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
         <div className="mt-3 pt-3 border-t border-white/5 grid grid-cols-2 gap-3">
           {recentSearches.length > 0 && (
             <div>
-              <div className="flex items-center gap-1 text-[10px] text-slate-500 font-bold mb-1.5">
-                <History className="w-3 h-3" />
-                최근 경로 기록
+              <div className="flex items-center justify-between text-[10px] text-slate-500 font-bold mb-1.5">
+                <div className="flex items-center gap-1">
+                  <History className="w-3 h-3" />
+                  최근 경로 기록
+                </div>
+                <button
+                  id="btn-clear-history"
+                  onClick={handleClearHistory}
+                  className="flex items-center gap-0.5 hover:text-rose-400 text-slate-500 font-medium transition-colors cursor-pointer select-none"
+                  title="최근 경로 기록 모두 삭제"
+                >
+                  <Trash2 className="w-3 h-3" />
+                  <span>Clear</span>
+                </button>
               </div>
               <div className="space-y-1">
                 {recentSearches.map((item, idx) => (

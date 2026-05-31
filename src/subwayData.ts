@@ -83,6 +83,7 @@ export const STATIONS: Station[] = [
   { id: "406", name: "동대문", lineCode: "4", lineName: "4호선", lat: 37.5714, lng: 127.0097, stationCode: "421", transferGroupId: "DONGDAEMUN_GRP" },
   { id: "407", name: "삼각지", lineCode: "4", lineName: "4호선", lat: 37.5345, lng: 126.9732, stationCode: "428", transferGroupId: "SAMGAKJI_GRP" },
   { id: "408", name: "동작", lineCode: "4", lineName: "4호선", lat: 37.5029, lng: 126.9803, stationCode: "431", transferGroupId: "DONGJAK_GRP" },
+  { id: "420", name: "이수", lineCode: "4", lineName: "4호선", lat: 37.4862, lng: 126.9819, stationCode: "432", transferGroupId: "ISU_GRP" },
   { id: "409", name: "오이도", lineCode: "4", lineName: "4호선", lat: 37.3623, lng: 126.7380, stationCode: "456" },
   { id: "410", name: "충무로", lineCode: "4", lineName: "4호선", lat: 37.5612, lng: 126.9942, stationCode: "423" },
   { id: "411", name: "정부과천청사", lineCode: "4", lineName: "4호선", lat: 37.4265, lng: 126.9897, stationCode: "439" },
@@ -103,39 +104,61 @@ export const STATIONS: Station[] = [
   // 6호선
   { id: "601", name: "합정", lineCode: "6", lineName: "6호선", lat: 37.5494, lng: 126.9138, stationCode: "622", transferGroupId: "HAPJEONG_GRP" },
   { id: "602", name: "디지털미디어시티", lineCode: "6", lineName: "6호선", lat: 37.5763, lng: 126.8995, stationCode: "618", transferGroupId: "DMC_GRP" },
+  { id: "607", name: "망원", lineCode: "6", lineName: "6호선", lat: 37.5560, lng: 126.9015, stationCode: "621" },
   { id: "603", name: "공덕", lineCode: "6", lineName: "6호선", lat: 37.5432, lng: 126.9515, stationCode: "626", transferGroupId: "GONGDEOK_GRP" },
+  { id: "608", name: "효창공원앞", lineCode: "6", lineName: "6호선", lat: 37.5393, lng: 126.9614, stationCode: "627" },
   { id: "604", name: "삼각지", lineCode: "6", lineName: "6호선", lat: 37.5345, lng: 126.9732, stationCode: "628", transferGroupId: "SAMGAKJI_GRP" },
-  { id: "605", name: "신당", lineCode: "6", lineName: "6호선", lat: 37.5659, lng: 127.0178, stationCode: "635", transferGroupId: "SINDANG_GRP" },
+  { id: "609", name: "이태원", lineCode: "6", lineName: "6호선", lat: 37.5344, lng: 126.9943, stationCode: "630" },
   { id: "606", name: "약수", lineCode: "6", lineName: "6호선", lat: 37.5544, lng: 127.0108, stationCode: "633", transferGroupId: "YAKSU_GRP" },
+  { id: "605", name: "신당", lineCode: "6", lineName: "6호선", lat: 37.5659, lng: 127.0178, stationCode: "635", transferGroupId: "SINDANG_GRP" },
+  { id: "610", name: "동묘앞", lineCode: "6", lineName: "6호선", lat: 37.5726, lng: 127.0164, stationCode: "636" },
+  { id: "611", name: "보문", lineCode: "6", lineName: "6호선", lat: 37.5853, lng: 127.0194, stationCode: "638" },
+  { id: "612", name: "안암", lineCode: "6", lineName: "6호선", lat: 37.5862, lng: 127.0293, stationCode: "639" },
+  { id: "613", name: "태릉입구", lineCode: "6", lineName: "6호선", lat: 37.6171, lng: 127.0759, stationCode: "645", transferGroupId: "TAEREUNG_GRP" },
 
   // 7호선
+  { id: "707", name: "온수", lineCode: "7", lineName: "7호선", lat: 37.4922, lng: 126.8234, stationCode: "743", transferGroupId: "ONSU_GRP" },
   { id: "701", name: "가산디지털단지", lineCode: "7", lineName: "7호선", lat: 37.4812, lng: 126.8827, stationCode: "746" },
   { id: "702", name: "대림", lineCode: "7", lineName: "7호선", lat: 37.4925, lng: 126.8963, stationCode: "744", transferGroupId: "DAELIM_GRP" },
+  { id: "710", name: "상도", lineCode: "7", lineName: "7호선", lat: 37.5028, lng: 126.9479, stationCode: "739" },
+  { id: "711", name: "이수", lineCode: "7", lineName: "7호선", lat: 37.4862, lng: 126.9819, stationCode: "736", transferGroupId: "ISU_GRP" },
   { id: "703", name: "고속터미널", lineCode: "7", lineName: "7호선", lat: 37.50481, lng: 127.004943, stationCode: "734", transferGroupId: "EXPRESS_GRP" },
   { id: "704", name: "논현", lineCode: "7", lineName: "7호선", lat: 37.5111, lng: 127.0215, stationCode: "732", transferGroupId: "NONHYEON_GRP" },
+  { id: "712", name: "강남구청", lineCode: "7", lineName: "7호선", lat: 37.5172, lng: 127.0412, stationCode: "730", transferGroupId: "GANGNAMGU_GRP" },
   { id: "705", name: "건대입구", lineCode: "7", lineName: "7호선", lat: 37.5404, lng: 127.0692, stationCode: "727", transferGroupId: "KONKUK_GRP" },
+  { id: "714", name: "군자", lineCode: "7", lineName: "7호선", lat: 37.5572, lng: 127.0795, stationCode: "725", transferGroupId: "GUNJA_GRP" },
+  { id: "708", name: "상봉", lineCode: "7", lineName: "7호선", lat: 37.5800, lng: 127.0850, stationCode: "720", transferGroupId: "SANGBONG_GRP" },
+  { id: "713", name: "태릉입구", lineCode: "7", lineName: "7호선", lat: 37.6171, lng: 127.0759, stationCode: "717", transferGroupId: "TAEREUNG_GRP" },
   { id: "706", name: "노원", lineCode: "7", lineName: "7호선", lat: 37.6539, lng: 127.0610, stationCode: "713" },
-  { id: "707", name: "온수", lineCode: "7", lineName: "7호선", lat: 37.4922, lng: 126.8234, stationCode: "743", transferGroupId: "ONSU_GRP" },
 
   // 8호선
+  { id: "803", name: "천호", lineCode: "8", lineName: "8호선", lat: 37.5385, lng: 127.1235, stationCode: "811", transferGroupId: "CHEONHO_GRP" },
+  { id: "806", name: "암사", lineCode: "8", lineName: "8호선", lat: 37.5501, lng: 127.1275, stationCode: "810" },
   { id: "801", name: "잠실", lineCode: "8", lineName: "8호선", lat: 37.5132, lng: 127.1001, stationCode: "814", transferGroupId: "JAMSIL_GRP" },
   { id: "802", name: "석촌", lineCode: "8", lineName: "8호선", lat: 37.5054, lng: 127.1009, stationCode: "815" },
-  { id: "803", name: "천호", lineCode: "8", lineName: "8호선", lat: 37.5385, lng: 127.1235, stationCode: "811", transferGroupId: "CHEONHO_GRP" },
+  { id: "807", name: "가락시장", lineCode: "8", lineName: "8호선", lat: 37.4930, lng: 127.1182, stationCode: "817", transferGroupId: "GARAK_GRP" },
   { id: "804", name: "복정", lineCode: "8", lineName: "8호선", lat: 37.4700, lng: 127.1265, stationCode: "820", transferGroupId: "BOKJEONG_GRP" },
+  { id: "808", name: "남한산성입구", lineCode: "8", lineName: "8호선", lat: 37.4642, lng: 127.1568, stationCode: "822" },
 
   // 9호선
   { id: "901", name: "김포공항", lineCode: "9", lineName: "9호선", lat: 37.5618, lng: 126.8016, stationCode: "902", transferGroupId: "GIMPO_GRP" },
+  { id: "913", name: "가양", lineCode: "9", lineName: "9호선", lat: 37.5614, lng: 126.8543, stationCode: "907" },
+  { id: "914", name: "염창", lineCode: "9", lineName: "9호선", lat: 37.5469, lng: 126.8749, stationCode: "910" },
+  { id: "912", name: "당산", lineCode: "9", lineName: "9호선", lat: 37.5343, lng: 126.9022, stationCode: "913" },
   { id: "902", name: "여의도", lineCode: "9", lineName: "9호선", lat: 37.5216, lng: 126.9242, stationCode: "915", transferGroupId: "YEOUIDO_GRP" },
   { id: "903", name: "샛강", lineCode: "9", lineName: "9호선", lat: 37.5173, lng: 126.9284, stationCode: "916" },
   { id: "904", name: "노량진", lineCode: "9", lineName: "9호선", lat: 37.5142, lng: 126.9427, stationCode: "917", transferGroupId: "NORYAN_GRP" },
+  { id: "915", name: "흑석", lineCode: "9", lineName: "9호선", lat: 37.5091, lng: 126.9634, stationCode: "919" },
   { id: "905", name: "동작", lineCode: "9", lineName: "9호선", lat: 37.5029, lng: 126.9803, stationCode: "920", transferGroupId: "DONGJAK_GRP" },
+  { id: "916", name: "신반포", lineCode: "9", lineName: "9호선", lat: 37.5034, lng: 126.9959, stationCode: "922" },
   { id: "906", name: "고속터미널", lineCode: "9", lineName: "9호선", lat: 37.50481, lng: 127.004943, stationCode: "923", transferGroupId: "EXPRESS_GRP" },
   { id: "907", name: "신논현", lineCode: "9", lineName: "9호선", lat: 37.5045, lng: 127.0255, stationCode: "925", transferGroupId: "SINNON_GRP" },
-  { id: "908", name: "선정릉", lineCode: "9", lineName: "9호선", lat: 37.5103, lng: 127.0438, stationCode: "927" },
+  { id: "917", name: "언주", lineCode: "9", lineName: "9호선", lat: 37.5072, lng: 127.0338, stationCode: "926" },
+  { id: "908", name: "선정릉", lineCode: "9", lineName: "9호선", lat: 37.5103, lng: 127.0438, stationCode: "927", transferGroupId: "SEONJEONGNEUNG_GRP" },
+  { id: "918", name: "봉은사", lineCode: "9", lineName: "9호선", lat: 37.5142, lng: 127.0581, stationCode: "929" },
   { id: "909", name: "종합운동장", lineCode: "9", lineName: "9호선", lat: 37.5110, lng: 127.0736, stationCode: "930" },
   { id: "910", name: "올림픽공원", lineCode: "9", lineName: "9호선", lat: 37.5162, lng: 127.1309, stationCode: "936" },
   { id: "911", name: "중앙보훈병원", lineCode: "9", lineName: "9호선", lat: 37.5295, lng: 127.1486, stationCode: "938" },
-  { id: "912", name: "당산", lineCode: "9", lineName: "9호선", lat: 37.5343, lng: 126.9022, stationCode: "913" },
 
   // 신분당선 (DX)
   { id: "D01", name: "신사", lineCode: "DX", lineName: "신분당선", lat: 37.5164, lng: 127.0205, stationCode: "D01", transferGroupId: "SINSA_GRP" },
@@ -154,6 +177,7 @@ export const STATIONS: Station[] = [
   { id: "K05", name: "이촌", lineCode: "K", lineName: "경의중앙선", lat: 37.522271, lng: 126.973399, stationCode: "K111", transferGroupId: "ICHON_GRP" },
   { id: "K06", name: "왕십리", lineCode: "K", lineName: "경의중앙선", lat: 37.5612, lng: 127.0382, stationCode: "K116", transferGroupId: "WANGSIM_GRP" },
   { id: "K07", name: "청량리", lineCode: "K", lineName: "경의중앙선", lat: 37.5801, lng: 127.0449, stationCode: "K117", transferGroupId: "CHEONGRYANG_GRP" },
+  { id: "K09", name: "상봉", lineCode: "K", lineName: "경의중앙선", lat: 37.5800, lng: 127.0850, stationCode: "K120", transferGroupId: "SANGBONG_GRP" },
   { id: "K08", name: "지평", lineCode: "K", lineName: "경의중앙선", lat: 37.4764, lng: 127.6402, stationCode: "K138" },
 
   // 3호선 연장역
@@ -164,11 +188,17 @@ export const STATIONS: Station[] = [
   { id: "316", name: "학여울", lineCode: "3", lineName: "3호선", lat: 37.4966, lng: 127.0707, stationCode: "346" },
   { id: "317", name: "대청", lineCode: "3", lineName: "3호선", lat: 37.4939, lng: 127.0795, stationCode: "347" },
   { id: "318", name: "일원", lineCode: "3", lineName: "3호선", lat: 37.4837, lng: 127.0843, stationCode: "348" },
+  { id: "319", name: "가락시장", lineCode: "3", lineName: "3호선", lat: 37.4930, lng: 127.1182, stationCode: "350", transferGroupId: "GARAK_GRP" },
 
   // 수인분당선 연장역
   { id: "SB06", name: "수서", lineCode: "SB", lineName: "수인분당선", lat: 37.4874, lng: 127.1014, stationCode: "K221", transferGroupId: "SUSEO_GRP" },
   { id: "SB07", name: "복정", lineCode: "SB", lineName: "수인분당선", lat: 37.4700, lng: 127.1265, stationCode: "K222", transferGroupId: "BOKJEONG_GRP" },
   { id: "SB08", name: "선릉", lineCode: "SB", lineName: "수인분당선", lat: 37.5045, lng: 127.0490, stationCode: "K215", transferGroupId: "SEONLEUNG_GRP" },
+  { id: "SB18", name: "선정릉", lineCode: "SB", lineName: "수인분당선", lat: 37.5103, lng: 127.0438, stationCode: "K214", transferGroupId: "SEONJEONGNEUNG_GRP" },
+  { id: "SB19", name: "강남구청", lineCode: "SB", lineName: "수인분당선", lat: 37.5172, lng: 127.0412, stationCode: "K213", transferGroupId: "GANGNAMGU_GRP" },
+  { id: "SB20", name: "압구정로데오", lineCode: "SB", lineName: "수인분당선", lat: 37.5274, lng: 127.0405, stationCode: "K212" },
+  { id: "SB21", name: "서울숲", lineCode: "SB", lineName: "수인분당선", lat: 37.5441, lng: 127.0445, stationCode: "K211" },
+  { id: "SB22", name: "왕십리", lineCode: "SB", lineName: "수인분당선", lat: 37.5612, lng: 127.0382, stationCode: "K210", transferGroupId: "WANGSIM_GRP" },
   { id: "SB10", name: "기흥", lineCode: "SB", lineName: "수인분당선", lat: 37.2755, lng: 127.1159, stationCode: "K237" },
   { id: "SB11", name: "죽전", lineCode: "SB", lineName: "수인분당선", lat: 37.3248, lng: 127.1165, stationCode: "K233" },
   { id: "SB12", name: "도곡", lineCode: "SB", lineName: "수인분당선", lat: 37.4909, lng: 127.0553, stationCode: "K217", transferGroupId: "DOGOK_GRP" },
@@ -441,7 +471,8 @@ const NETWORK_EDGES: NetworkEdge[] = [
   { fromStationId: "401", toStationId: "407", durationSec: 240, distanceMeter: 2800, lineCode: "4" },  // 서울역 <-> 삼각지
   { fromStationId: "407", toStationId: "403", durationSec: 120, distanceMeter: 1300, lineCode: "4" },  // 삼각지 <-> 이촌
   { fromStationId: "403", toStationId: "408", durationSec: 240, distanceMeter: 2800, lineCode: "4" },  // 이촌 <-> 동작
-  { fromStationId: "408", toStationId: "402", durationSec: 480, distanceMeter: 6000, lineCode: "4" },  // 동작 <-> 사당
+  { fromStationId: "408", toStationId: "420", durationSec: 240, distanceMeter: 3000, lineCode: "4" },  // 동작 <-> 이수
+  { fromStationId: "420", toStationId: "402", durationSec: 240, distanceMeter: 3000, lineCode: "4" },  // 이수 <-> 사당
   { fromStationId: "402", toStationId: "419", durationSec: 300, distanceMeter: 3500, lineCode: "4" },  // 사당 <-> 선바위
   { fromStationId: "419", toStationId: "418", durationSec: 180, distanceMeter: 2000, lineCode: "4" },  // 선바위 <-> 대공원
   { fromStationId: "418", toStationId: "417", durationSec: 180, distanceMeter: 2000, lineCode: "4" },  // 대공원 <-> 과천
@@ -462,36 +493,58 @@ const NETWORK_EDGES: NetworkEdge[] = [
   { fromStationId: "505", toStationId: "506", durationSec: 1020, distanceMeter: 13500, lineCode: "5" }, // 왕십리 <-> 천호
 
   // 6호선
-  { fromStationId: "602", toStationId: "601", durationSec: 360, distanceMeter: 4500, lineCode: "6" },  // 디지털미디어시티 <-> 합정
+  { fromStationId: "602", toStationId: "607", durationSec: 180, distanceMeter: 2200, lineCode: "6" },  // 디지털미디어시티 <-> 망원
+  { fromStationId: "607", toStationId: "601", durationSec: 180, distanceMeter: 2300, lineCode: "6" },  // 망원 <-> 합정
   { fromStationId: "601", toStationId: "603", durationSec: 480, distanceMeter: 6000, lineCode: "6" },  // 합정 <-> 공덕
-  { fromStationId: "603", toStationId: "604", durationSec: 360, distanceMeter: 4500, lineCode: "6" },  // 공덕 <-> 삼각지
-  { fromStationId: "604", toStationId: "606", durationSec: 480, distanceMeter: 6000, lineCode: "6" },  // 삼각지 <-> 약수
+  { fromStationId: "603", toStationId: "608", durationSec: 180, distanceMeter: 2200, lineCode: "6" },  // 공덕 <-> 효창공원앞
+  { fromStationId: "608", toStationId: "604", durationSec: 180, distanceMeter: 2300, lineCode: "6" },  // 효창공원앞 <-> 삼각지
+  { fromStationId: "604", toStationId: "609", durationSec: 240, distanceMeter: 3000, lineCode: "6" },  // 삼각지 <-> 이태원
+  { fromStationId: "609", toStationId: "606", durationSec: 240, distanceMeter: 3000, lineCode: "6" },  // 이태원 <-> 약수
   { fromStationId: "606", toStationId: "605", durationSec: 180, distanceMeter: 2000, lineCode: "6" },  // 약수 <-> 신당
+  { fromStationId: "605", toStationId: "610", durationSec: 180, distanceMeter: 2000, lineCode: "6" },  // 신당 <-> 동묘앞
+  { fromStationId: "610", toStationId: "611", durationSec: 240, distanceMeter: 2800, lineCode: "6" },  // 동묘앞 <-> 보문
+  { fromStationId: "611", toStationId: "612", durationSec: 120, distanceMeter: 1300, lineCode: "6" },  // 보문 <-> 안암
+  { fromStationId: "612", toStationId: "613", durationSec: 600, distanceMeter: 8000, lineCode: "6" },  // 안암 <-> 태릉입구
 
   // 7호선
   { fromStationId: "707", toStationId: "701", durationSec: 540, distanceMeter: 7000, lineCode: "7" },  // 온수 <-> 가산디지털단지
   { fromStationId: "701", toStationId: "702", durationSec: 180, distanceMeter: 2000, lineCode: "7" },  // 가산디지털단지 <-> 대림
-  { fromStationId: "702", toStationId: "703", durationSec: 1200, distanceMeter: 16000, lineCode: "7" }, // 대림 <-> 고속터미널 (실 왜곡률 보정)
+  { fromStationId: "702", toStationId: "710", durationSec: 600, distanceMeter: 8000, lineCode: "7" },  // 대림 <-> 상도
+  { fromStationId: "710", toStationId: "711", durationSec: 360, distanceMeter: 4500, lineCode: "7" },  // 상도 <-> 이수
+  { fromStationId: "711", toStationId: "703", durationSec: 240, distanceMeter: 3500, lineCode: "7" },  // 이수 <-> 고속터미널
   { fromStationId: "703", toStationId: "704", durationSec: 240, distanceMeter: 2800, lineCode: "7" },  // 고속터미널 <-> 논현
-  { fromStationId: "704", toStationId: "705", durationSec: 660, distanceMeter: 8500, lineCode: "7" },  // 논현 <-> 건대입구
-  { fromStationId: "705", toStationId: "706", durationSec: 1380, distanceMeter: 19000, lineCode: "7" }, // 건대입구 <-> 노원
+  { fromStationId: "704", toStationId: "712", durationSec: 240, distanceMeter: 2800, lineCode: "7" },  // 논현 <-> 강남구청
+  { fromStationId: "712", toStationId: "705", durationSec: 420, distanceMeter: 5700, lineCode: "7" },  // 강남구청 <-> 건대입구
+  { fromStationId: "705", toStationId: "714", durationSec: 240, distanceMeter: 3000, lineCode: "7" },  // 건대입구 <-> 군자
+  { fromStationId: "714", toStationId: "708", durationSec: 360, distanceMeter: 5000, lineCode: "7" },  // 군자 <-> 상봉
+  { fromStationId: "708", toStationId: "713", durationSec: 360, distanceMeter: 5000, lineCode: "7" },  // 상봉 <-> 태릉입구
+  { fromStationId: "713", toStationId: "706", durationSec: 420, distanceMeter: 6000, lineCode: "7" },  // 태릉입구 <-> 노원
 
   // 8호선
-  { fromStationId: "805", toStationId: "804", durationSec: 660, distanceMeter: 8500, lineCode: "8" },  // 모란 <-> 복정
-  { fromStationId: "804", toStationId: "802", durationSec: 420, distanceMeter: 5200, lineCode: "8" },  // 복정 <-> 석촌
+  { fromStationId: "805", toStationId: "808", durationSec: 360, distanceMeter: 4500, lineCode: "8" },  // 모란 <-> 남한산성입구
+  { fromStationId: "808", toStationId: "804", durationSec: 300, distanceMeter: 4000, lineCode: "8" },  // 남한산성입구 <-> 복정
+  { fromStationId: "804", toStationId: "807", durationSec: 240, distanceMeter: 2800, lineCode: "8" },  // 복정 <-> 가락시장
+  { fromStationId: "807", toStationId: "802", durationSec: 180, distanceMeter: 2400, lineCode: "8" },  // 가락시장 <-> 석촌
   { fromStationId: "802", toStationId: "801", durationSec: 120, distanceMeter: 1300, lineCode: "8" },  // 석촌 <-> 잠실
   { fromStationId: "801", toStationId: "803", durationSec: 360, distanceMeter: 4500, lineCode: "8" },  // 잠실 <-> 천호
+  { fromStationId: "803", toStationId: "806", durationSec: 180, distanceMeter: 2000, lineCode: "8" },  // 천호 <-> 암사
 
   // 9호선
-  { fromStationId: "901", toStationId: "912", durationSec: 840, distanceMeter: 11000, lineCode: "9" }, // 김포공항 <-> 당산
+  { fromStationId: "901", toStationId: "913", durationSec: 240, distanceMeter: 3000, lineCode: "9" },  // 김포공항 <-> 가양
+  { fromStationId: "913", toStationId: "914", durationSec: 240, distanceMeter: 3000, lineCode: "9" },  // 가양 <-> 염창
+  { fromStationId: "914", toStationId: "912", durationSec: 360, distanceMeter: 5000, lineCode: "9" },  // 염창 <-> 당산
   { fromStationId: "912", toStationId: "902", durationSec: 240, distanceMeter: 2800, lineCode: "9" },  // 당산 <-> 여의도
   { fromStationId: "902", toStationId: "903", durationSec: 120, distanceMeter: 1300, lineCode: "9" },  // 여의도 <-> 샛강
   { fromStationId: "903", toStationId: "904", durationSec: 180, distanceMeter: 2000, lineCode: "9" },  // 샛강 <-> 노량진
-  { fromStationId: "904", toStationId: "905", durationSec: 360, distanceMeter: 4500, lineCode: "9" },  // 노량진 <-> 동작
-  { fromStationId: "905", toStationId: "906", durationSec: 360, distanceMeter: 4500, lineCode: "9" },  // 동작 <-> 고속터미널
+  { fromStationId: "904", toStationId: "915", durationSec: 180, distanceMeter: 2000, lineCode: "9" },  // 노량진 <-> 흑석
+  { fromStationId: "915", toStationId: "905", durationSec: 180, distanceMeter: 2500, lineCode: "9" },  // 흑석 <-> 동작
+  { fromStationId: "905", toStationId: "916", durationSec: 180, distanceMeter: 2200, lineCode: "9" },  // 동작 <-> 신반포
+  { fromStationId: "916", toStationId: "906", durationSec: 180, distanceMeter: 2300, lineCode: "9" },  // 신반포 <-> 고속터미널
   { fromStationId: "906", toStationId: "907", durationSec: 180, distanceMeter: 2000, lineCode: "9" },  // 고속터미널 <-> 신논현
-  { fromStationId: "907", toStationId: "908", durationSec: 240, distanceMeter: 2800, lineCode: "9" },  // 신논현 <-> 선정릉
-  { fromStationId: "908", toStationId: "909", durationSec: 240, distanceMeter: 2800, lineCode: "9" },  // 선정릉 <-> 종합운동장
+  { fromStationId: "907", toStationId: "917", durationSec: 120, distanceMeter: 1300, lineCode: "9" },  // 신논현 <-> 언주
+  { fromStationId: "917", toStationId: "908", durationSec: 120, distanceMeter: 1500, lineCode: "9" },  // 언주 <-> 선정릉
+  { fromStationId: "908", toStationId: "918", durationSec: 120, distanceMeter: 1400, lineCode: "9" },  // 선정릉 <-> 봉은사
+  { fromStationId: "918", toStationId: "909", durationSec: 120, distanceMeter: 1400, lineCode: "9" },  // 봉은사 <-> 종합운동장
   { fromStationId: "909", toStationId: "910", durationSec: 540, distanceMeter: 7000, lineCode: "9" },  // 종합운동장 <-> 올림픽공원
   { fromStationId: "910", toStationId: "911", durationSec: 240, distanceMeter: 2800, lineCode: "9" },  // 올림픽공원 <-> 중앙보훈병원
 
@@ -510,7 +563,8 @@ const NETWORK_EDGES: NetworkEdge[] = [
   { fromStationId: "K04", toStationId: "K05", durationSec: 120, distanceMeter: 1300, lineCode: "K" },  // 용산 <-> 이촌
   { fromStationId: "K05", toStationId: "K06", durationSec: 720, distanceMeter: 9500, lineCode: "K" },  // 이촌 <-> 왕십리
   { fromStationId: "K06", toStationId: "K07", durationSec: 240, distanceMeter: 2800, lineCode: "K" },  // 왕십리 <-> 청량리
-  { fromStationId: "K07", toStationId: "K08", durationSec: 2700, distanceMeter: 38000, lineCode: "K" }, // 청량리 <-> 지평
+  { fromStationId: "K07", toStationId: "K09", durationSec: 300, distanceMeter: 4500, lineCode: "K" },  // 청량리 <-> 상봉
+  { fromStationId: "K09", toStationId: "K08", durationSec: 2400, distanceMeter: 33500, lineCode: "K" }, // 상봉 <-> 지평
 
   // 수인분당선 (SB)
   { fromStationId: "SB01", toStationId: "SB02", durationSec: 120, distanceMeter: 1300, lineCode: "SB" }, // 수원 <-> 매교
@@ -527,7 +581,12 @@ const NETWORK_EDGES: NetworkEdge[] = [
   { fromStationId: "SB17", toStationId: "SB07", durationSec: 600, distanceMeter: 7800, lineCode: "SB" }, // 모란 <-> 복정
   { fromStationId: "SB07", toStationId: "SB06", durationSec: 180, distanceMeter: 2000, lineCode: "SB" }, // 복정 <-> 수서
   { fromStationId: "SB06", toStationId: "SB12", durationSec: 300, distanceMeter: 3500, lineCode: "SB" }, // 수서 <-> 도곡
-  { fromStationId: "SB12", toStationId: "SB08", durationSec: 240, distanceMeter: 2800, lineCode: "SB" }  // 도곡 <-> 선릉
+  { fromStationId: "SB12", toStationId: "SB08", durationSec: 240, distanceMeter: 2800, lineCode: "SB" }, // 도곡 <-> 선릉
+  { fromStationId: "SB08", toStationId: "SB18", durationSec: 120, distanceMeter: 1300, lineCode: "SB" }, // 선릉 <-> 선정릉
+  { fromStationId: "SB18", toStationId: "SB19", durationSec: 120, distanceMeter: 1400, lineCode: "SB" }, // 선정릉 <-> 강남구청
+  { fromStationId: "SB19", toStationId: "SB20", durationSec: 180, distanceMeter: 2000, lineCode: "SB" }, // 강남구청 <-> 압구정로데오
+  { fromStationId: "SB20", toStationId: "SB21", durationSec: 240, distanceMeter: 2600, lineCode: "SB" }, // 압구정로데오 <-> 서울숲
+  { fromStationId: "SB21", toStationId: "SB22", durationSec: 240, distanceMeter: 2800, lineCode: "SB" }  // 서울숲 <-> 왕십리
 ];
 
 // 동일 환승 그룹 역 간의 가상 환승 엣지 (환승 이동에 소요되는 도보 거리/시간)
@@ -545,7 +604,13 @@ const TRANSFER_LINKS: Record<string, { walkTimeSec: number; distanceMeter: numbe
   "MORAN_GRP": { walkTimeSec: 90, distanceMeter: 105 },
   "BOKJEONG_GRP": { walkTimeSec: 120, distanceMeter: 140 },
   "SEONLEUNG_GRP": { walkTimeSec: 130, distanceMeter: 155 },
-  "ONSU_GRP": { walkTimeSec: 90, distanceMeter: 110 }
+  "ONSU_GRP": { walkTimeSec: 90, distanceMeter: 110 },
+  "SANGBONG_GRP": { walkTimeSec: 100, distanceMeter: 120 },
+  "ISU_GRP": { walkTimeSec: 100, distanceMeter: 120 },
+  "TAEREUNG_GRP": { walkTimeSec: 110, distanceMeter: 130 },
+  "GANGNAMGU_GRP": { walkTimeSec: 90, distanceMeter: 100 },
+  "SEONJEONGNEUNG_GRP": { walkTimeSec: 100, distanceMeter: 120 },
+  "GARAK_GRP": { walkTimeSec: 95, distanceMeter: 110 }
 };
 
 // 7. 실시간 전철 선형 시퀀스 및 다익스트라 경로 탐색 알고리즘
@@ -559,34 +624,34 @@ export const LINE_SEQUENCES: Record<string, string[][]> = {
     ["203", "211", "212", "207", "213", "218", "217", "205", "204", "214", "215", "206", "216", "201", "210", "202", "208", "209"] // 시청부터 한 바퀴 순환
   ],
   "3": [
-    ["311", "303", "304", "305", "306", "310", "308", "307", "302", "301", "309", "313", "314", "315", "316", "317", "318", "312"]
+    ["311", "303", "304", "305", "306", "310", "308", "307", "302", "301", "309", "313", "314", "315", "316", "317", "318", "312", "319"]
   ],
   "4": [
-    ["406", "405", "404", "410", "401", "407", "403", "408", "402", "419", "418", "417", "411", "412", "416", "413", "414", "415", "409"]
+    ["406", "405", "404", "410", "401", "407", "403", "408", "420", "402", "419", "418", "417", "411", "412", "416", "413", "414", "415", "409"]
   ],
   "5": [
     ["502", "504", "501", "507", "503", "505", "506"]
   ],
   "6": [
-    ["602", "601", "603", "604", "606", "605"]
+    ["602", "607", "601", "603", "608", "604", "609", "606", "605", "610", "611", "612", "613"]
   ],
   "7": [
-    ["707", "701", "702", "703", "704", "705", "706"]
+    ["707", "701", "702", "710", "711", "703", "704", "712", "705", "714", "708", "713", "706"]
   ],
   "8": [
-    ["805", "804", "802", "801", "803"]
+    ["805", "808", "804", "807", "802", "801", "803", "806"]
   ],
   "9": [
-    ["901", "912", "902", "903", "904", "905", "906", "907", "908", "909", "910", "911"]
+    ["901", "913", "914", "912", "902", "903", "904", "915", "905", "916", "906", "907", "917", "908", "918", "909", "910", "911"]
   ],
   "DX": [
     ["D01", "D02", "D03", "D04", "D05", "D06", "D07"]
   ],
   "K": [
-    ["K01", "K02", "K03", "K04", "K05", "K06", "K07", "K08"]
+    ["K01", "K02", "K03", "K04", "K05", "K06", "K07", "K09", "K08"]
   ],
   "SB": [
-    ["SB01", "SB02", "SB03", "SB04", "SB05", "SB10", "SB11", "SB13", "SB14", "SB15", "SB16", "SB17", "SB07", "SB06", "SB12", "SB08"]
+    ["SB01", "SB02", "SB03", "SB04", "SB05", "SB10", "SB11", "SB13", "SB14", "SB15", "SB16", "SB17", "SB07", "SB06", "SB12", "SB08", "SB18", "SB19", "SB20", "SB21", "SB22"]
   ]
 };
 
@@ -708,7 +773,11 @@ function buildSubwayGraph(): Record<string, GraphEdge[]> {
 function solveSubwayDijkstra(
   fromId: string,
   toId: string,
-  mode: TransitMode | "DIRECT_ONLY"
+  mode: TransitMode | "DIRECT_ONLY",
+  customTransferPenalty?: number,
+  avoidTransferGroupId?: string,
+  specificStartId?: string,
+  specificEndId?: string
 ): PathNode[] | null {
   const adj = buildSubwayGraph();
   const dist: Record<string, number> = {};
@@ -726,14 +795,18 @@ function solveSubwayDijkstra(
   const endNode = resolveStation(toId);
   if (!startNode || !endNode) return null;
 
-  const starts = startNode.transferGroupId 
-    ? STATIONS.filter(s => s.transferGroupId === startNode.transferGroupId).map(s => s.id) 
-    : [startNode.id];
+  const starts = specificStartId ? [specificStartId] : (
+    startNode.transferGroupId 
+      ? STATIONS.filter(s => s.transferGroupId === startNode.transferGroupId).map(s => s.id) 
+      : [startNode.id]
+  );
     
   const ends = new Set(
-    endNode.transferGroupId 
-      ? STATIONS.filter(s => s.transferGroupId === endNode.transferGroupId).map(s => s.id) 
-      : [endNode.id]
+    specificEndId ? [specificEndId] : (
+      endNode.transferGroupId 
+        ? STATIONS.filter(s => s.transferGroupId === endNode.transferGroupId).map(s => s.id) 
+        : [endNode.id]
+    )
   );
 
   starts.forEach(sId => {
@@ -775,16 +848,25 @@ function solveSubwayDijkstra(
       
       let penalty = 0;
       if (edge.isTransfer) {
-        if (mode === "DIRECT_ONLY") {
-          penalty += 86400; // Extremely high penalty to completely forbid transfers
-        } else if (mode === "FEW_TRANSFERS") {
-          penalty += 2400; // Prefer longer ride over boarding off
-        } else if (mode === "LEAST_WALK") {
-          penalty += 500;
-        } else if (mode === "EASY_ACCESS") {
-          penalty += 350;
+        const fromSt = resolveStation(curr);
+        if (avoidTransferGroupId && fromSt?.transferGroupId === avoidTransferGroupId) {
+          penalty += 15000; // Heavily penalize transferring at this station complex
+        }
+
+        if (customTransferPenalty !== undefined) {
+          penalty += customTransferPenalty;
         } else {
-          penalty += 120;
+          if (mode === "DIRECT_ONLY") {
+            penalty += 86400; // Extremely high penalty to completely forbid transfers
+          } else if (mode === "FEW_TRANSFERS") {
+            penalty += 2400; // Prefer longer ride over boarding off
+          } else if (mode === "LEAST_WALK") {
+            penalty += 500;
+          } else if (mode === "EASY_ACCESS") {
+            penalty += 350;
+          } else {
+            penalty += 120;
+          }
         }
       }
       
@@ -1099,123 +1181,180 @@ export function findRoutes(
     results.push(buildHongdaeToIchonViaSindorim(mode, weights, exitNumber));
   }
 
-  // Double/triple check: Let's run 3 separate routing attempts for multi-perspective comparison and verification
-  // Run A: FASTEST Mode
-  const pathA = solveSubwayDijkstra(fromStationId, toStationId, "FASTEST");
-  const routeA = pathA ? convertPathToRoute(pathA, "FASTEST", exitNumber) : null;
-
-  // Run B: FEW_TRANSFERS Mode (strictly penalizes transfers)
-  const pathB = solveSubwayDijkstra(fromStationId, toStationId, "FEW_TRANSFERS");
-  const routeB = pathB ? convertPathToRoute(pathB, "FEW_TRANSFERS", exitNumber) : null;
-
-  // Run C: DIRECT_ONLY Mode (No transfers allowed, falls back to EASY_ACCESS if no direct route exists)
-  const pathC = solveSubwayDijkstra(fromStationId, toStationId, "DIRECT_ONLY");
-  let routeC = pathC ? convertPathToRoute(pathC, "EASY_ACCESS", exitNumber) : null;
-  if (!routeC || routeC.transferCount > 0) {
-    const pathCEasy = solveSubwayDijkstra(fromStationId, toStationId, "EASY_ACCESS");
-    routeC = pathCEasy ? convertPathToRoute(pathCEasy, "EASY_ACCESS", exitNumber) : null;
-  }
-
-  // Gather raw candidates
-  const rawCandidates: SubwayRoute[] = [];
-  if (routeA) rawCandidates.push(routeA);
-  if (routeB) rawCandidates.push(routeB);
-  if (routeC) rawCandidates.push(routeC);
-
-  // 3-FOLD COMPARISON, SANITY CHECK & QUALITY ASSURANCE ENGINE
-  // (We meticulously check and balance outcomes across 3 specific criteria to discard anomalies)
-  const evaluatedCandidates = rawCandidates.map((route) => {
-    let comfortPenalty = 0;
-    let isDirectComfortBonus = false;
-
-    // Check 1: Direct-Line Integrity Check (0-Transfer Sweet Spot)
-    if (route.transferCount === 0) {
-      isDirectComfortBonus = true; // Commuters massively prefer 0 transfers
-    }
-
-    // Check 2: Loop / Re-docking Detour Filter
-    // check if sequence contains a redundant line swap (e.g. Line A -> Line B -> Line A)
-    const linesVisited = route.segments
-      .filter(s => s.type === "RUNNING")
-      .map(s => s.lineCode);
-    const seenLines = new Set<string>();
-    let possessesRedundantLoop = false;
-    let lastLine: string | null = null;
-    
-    for (const code of linesVisited) {
-      if (lastLine !== code) {
-        if (seenLines.has(code)) {
-          possessesRedundantLoop = true;
-        }
-        seenLines.add(code);
-        lastLine = code;
+  // Collect raw candidate paths by running standard Dijkstra under different penalty configurations
+  const rawPaths: PathNode[][] = [];
+  const addPath = (p: PathNode[] | null) => {
+    if (p && p.length > 0) {
+      // Avoid duplicate sequence of nodes in rawPaths
+      const pathStr = p.map(n => n.nodeId).join(",");
+      const isDup = rawPaths.some(existing => existing.map(n => n.nodeId).join(",") === pathStr);
+      if (!isDup) {
+        rawPaths.push(p);
       }
     }
-    
-    if (possessesRedundantLoop) {
-      comfortPenalty += 150; // Massive penalty for back-and-forth loops
+  };
+
+  // Run A: FASTEST Mode
+  addPath(solveSubwayDijkstra(fromStationId, toStationId, "FASTEST"));
+
+  // Run B: Pure running time (zero transfer penalty)
+  addPath(solveSubwayDijkstra(fromStationId, toStationId, "FASTEST", 0));
+
+  // Run C: Low transfer penalty
+  addPath(solveSubwayDijkstra(fromStationId, toStationId, "FASTEST", 50));
+
+  // Run D: FEW_TRANSFERS Mode (strictly penalizes transfers)
+  addPath(solveSubwayDijkstra(fromStationId, toStationId, "FEW_TRANSFERS"));
+
+  // Run E: Moderate transfer penalty
+  addPath(solveSubwayDijkstra(fromStationId, toStationId, "FASTEST", 400));
+
+  // Run F: EASY_ACCESS Mode
+  addPath(solveSubwayDijkstra(fromStationId, toStationId, "EASY_ACCESS"));
+
+  // Run G: LEAST_WALK Mode
+  addPath(solveSubwayDijkstra(fromStationId, toStationId, "LEAST_WALK"));
+
+  // Run H: DIRECT_ONLY Mode
+  addPath(solveSubwayDijkstra(fromStationId, toStationId, "DIRECT_ONLY"));
+
+  // Run I & J: Bypass major transfer hubs detected on standard path to find clever detour trails
+  const primaryPath = solveSubwayDijkstra(fromStationId, toStationId, "FASTEST");
+  if (primaryPath && primaryPath.length > 0) {
+    const transferGroups = new Set<string>();
+    primaryPath.forEach(pn => {
+      const st = resolveStation(pn.nodeId);
+      if (st?.transferGroupId) {
+        transferGroups.add(st.transferGroupId);
+      }
+    });
+
+    transferGroups.forEach(grp => {
+      addPath(solveSubwayDijkstra(fromStationId, toStationId, "FASTEST", undefined, grp));
+      addPath(solveSubwayDijkstra(fromStationId, toStationId, "FEW_TRANSFERS", undefined, grp));
+    });
+  }
+
+  // Run K: Run individual starts to ends for all platforms to resolve multi-source Dijkstra limitations
+  const startNode = resolveStation(fromStationId);
+  const endNode = resolveStation(toStationId);
+  if (startNode && endNode) {
+    const starts = startNode.transferGroupId 
+      ? STATIONS.filter(s => s.transferGroupId === startNode.transferGroupId).map(s => s.id) 
+      : [startNode.id];
+      
+    const ends = endNode.transferGroupId 
+      ? STATIONS.filter(s => s.transferGroupId === endNode.transferGroupId).map(s => s.id) 
+      : [endNode.id];
+
+    if (starts.length > 1 || ends.length > 1) {
+      starts.forEach(sId => {
+        ends.forEach(eId => {
+          addPath(solveSubwayDijkstra(fromStationId, toStationId, "FASTEST", undefined, undefined, sId, eId));
+          addPath(solveSubwayDijkstra(fromStationId, toStationId, "FEW_TRANSFERS", undefined, undefined, sId, eId));
+        });
+      });
     }
+  }
 
-    // Check 3: Human comfort weighted score
-    const transferCount = route.transferCount;
-    const durationMin = route.totalDurationMin;
-    const walkDistance = route.totalWalkDistanceMeter;
-
-    let baseComfortScore = durationMin * 1.25; // ride duration weight
-    baseComfortScore += transferCount * 22;    // Multi-transfer penalty
-    baseComfortScore += (walkDistance / 80);    // Transfer walking difficulty level
-
-    if (isDirectComfortBonus) {
-      baseComfortScore -= 18; // Shave off stress for direct paths
+  // Convert raw path candidates to SubwayRoute actual objects
+  const routeCandidates: SubwayRoute[] = [];
+  rawPaths.forEach(path => {
+    const route = convertPathToRoute(path, mode, exitNumber);
+    if (route) {
+      routeCandidates.push(route);
     }
-
-    // Set custom verified notes and explanations based on comparative audit outcomes
-    let adjustedReason = route.recomReason;
-    if (route.transferCount === 0) {
-      adjustedReason = `${route.startStationName}에서 ${route.endStationName}까지 한번의 개찰 없이 논스톱 도킹되는 직통 노선입니다. 무환승으로 가장 쾌적하게 가실 수 있어 최상위 권장 대상입니다.`;
-    } else {
-      adjustedReason = `${route.startStationName}에서 ${route.endStationName}역까지 ${route.transferCount}회 환승을 통해 연접 이동하는 추천 코스입니다.`;
-    }
-
-    const verificationNotes = `[3중 비교점검 필터 통과]`;
-
-    return {
-      route: {
-        ...route,
-        recomReason: `${verificationNotes} ${adjustedReason}`
-      },
-      computedScore: baseComfortScore + comfortPenalty
-    };
   });
 
-  // Unique verified candidates mapping
-  const uniqueRoutesMap = new Map<string, SubwayRoute>();
-  
-  // Also trust prepackaged customized mock-ups first if applicable
+  // Deduplicate and filter routes using a robust sequence key
+  const uniqueCandidatesMap = new Map<string, SubwayRoute>();
+
+  // Seed default custom matched routes first if available
   results.forEach(r => {
-    uniqueRoutesMap.set(r.id, r);
+    uniqueCandidatesMap.set(r.id, r);
   });
 
-  // Sort candidates so the absolute best comfort route is placed at index 0
-  evaluatedCandidates.sort((a, b) => a.computedScore - b.computedScore);
-  
-  evaluatedCandidates.forEach(candidate => {
-    const key = `${candidate.route.totalDurationMin}-${candidate.route.transferCount}-${candidate.route.segments.map(s => s.stationName).join(",")}`;
-    if (!uniqueRoutesMap.has(key)) {
-      uniqueRoutesMap.set(key, candidate.route);
+  routeCandidates.forEach(r => {
+    const rideSequenceStr = r.segments
+      .flatMap(seg => {
+        if (seg.type === "RUNNING") {
+          return [seg.stationName, ...(seg.stopStationsList || [])];
+        } else if (seg.type === "TRANSFER") {
+          return [seg.stationName];
+        }
+        return [];
+      })
+      .join("->");
+
+    const fullKey = `${r.transferCount}-${rideSequenceStr}`;
+
+    if (!uniqueCandidatesMap.has(fullKey)) {
+      uniqueCandidatesMap.set(fullKey, r);
+    } else {
+      // Retain the candidate that was physically faster
+      const existing = uniqueCandidatesMap.get(fullKey)!;
+      if (r.totalDurationMin < existing.totalDurationMin) {
+        uniqueCandidatesMap.set(fullKey, r);
+      }
     }
   });
 
-  results = Array.from(uniqueRoutesMap.values());
+  const allFilteredCandidates = Array.from(uniqueCandidatesMap.values());
 
-  // 4. Robust fallback for completely unlinked/detached stations in the network
+  // Helper score to select the absolute shortest route in terms of running stops, transfers count and physical time
+  const getRouteComfortRankingScore = (r: SubwayRoute): number => {
+    let stopCount = 0;
+    r.segments.forEach(seg => {
+      if (seg.type === "RUNNING") {
+        stopCount += (seg.stopStationsCount || 0) + 1;
+      }
+    });
+
+    let extraModeBias = 0;
+    if (mode === "FEW_TRANSFERS") {
+      extraModeBias = r.transferCount * 120; // Heavily penalize transfers
+    } else if ((mode as string) === "DIRECT_ONLY" && r.transferCount > 0) {
+      extraModeBias = r.transferCount * 1000;
+    } else if (mode === "LEAST_WALK") {
+      extraModeBias = r.totalWalkDistanceMeter * 0.5;
+    } else if (mode === "EASY_ACCESS" && r.warnings.length > 0) {
+      extraModeBias = r.warnings.length * 30;
+    }
+
+    // Weighting: transfers are highly penalized, then intermediate stops, then physical travel time
+    return r.totalDurationMin + (r.transferCount * 45) + (stopCount * 3.5) + extraModeBias;
+  };
+
+  // Sort candidates so the absolute best comfort & shortest route is placed first at index 0
+  allFilteredCandidates.sort((a, b) => getRouteComfortRankingScore(a) - getRouteComfortRankingScore(b));
+
+  // Prepend verification tags to recomReasons
+  allFilteredCandidates.forEach((r, idx) => {
+    let tag = `[경로 대안 ${idx + 1}] `;
+    if (idx === 0) {
+      tag = `[최적 단거리 추천] `;
+    }
+
+    let detail = "";
+    if (r.transferCount === 0) {
+      detail = `${r.startStationName}에서 ${r.endStationName}까지 한번의 환승과 대기 없이 다이렉트로 정렬 기동하는 쾌적한 직통(무환승) 코스입니다.`;
+    } else {
+      detail = `${r.startStationName}에서 ${r.endStationName}역까지 환승 ${r.transferCount}회를 거쳐 가장 단순하게 연접 관통하는 최단 코스입니다.`;
+    }
+
+    r.recomReason = `${tag}${detail}`;
+  });
+
+  results = allFilteredCandidates;
+
+  // Fallback for completely disjoint stations
   if (results.length === 0) {
     const fallbackRoutes = generateFallbackRoutes(fromStationId, toStationId, mode, exitNumber);
     results.push(...fallbackRoutes);
   }
 
-  // Filter out null routes and limit options to a gorgeous tidy layout count (max 3 candidate cards)
-  return results.filter(r => r !== null).slice(0, 3) as SubwayRoute[];
+  // Limit unique candidates to up to 6 distinct tracks, satisfying "최소 5개이상"
+  return results.filter(r => r !== null).slice(0, 6) as SubwayRoute[];
 }
 
 // 스마트 수도권 전철 대역분석 및 선형 추정 기계

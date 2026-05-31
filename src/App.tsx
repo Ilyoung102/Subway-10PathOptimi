@@ -54,22 +54,61 @@ export default function App() {
     let fromId = from.stationId;
     let toId = to.stationId;
 
-    if (!fromId) {
-      const cleanFromName = from.name.replace("역", "").trim();
-      let match = STATIONS.find(s => s.name === cleanFromName);
-      if (!match) {
-        match = STATIONS.find(s => s.name.startsWith(cleanFromName) || cleanFromName.startsWith(s.name));
+    let matchedFrom = STATIONS.find(s => s.id === fromId);
+    if (!matchedFrom) {
+      let cleanFromName = (from.name || "").replace("역", "").trim();
+      if (cleanFromName.includes("(")) {
+        cleanFromName = cleanFromName.split("(")[0].trim();
       }
-      fromId = match ? match.id : "205"; // fallback to 강남
-    }
-    if (!toId) {
-      const cleanToName = to.name.replace("역", "").trim();
-      let match = STATIONS.find(s => s.name === cleanToName);
-      if (!match) {
-        match = STATIONS.find(s => s.name.startsWith(cleanToName) || cleanToName.startsWith(s.name));
+      matchedFrom = STATIONS.find(s => s.name === cleanFromName);
+      if (!matchedFrom) {
+        matchedFrom = STATIONS.find(s => s.name.startsWith(cleanFromName) || cleanFromName.startsWith(s.name));
       }
-      toId = match ? match.id : "401"; // fallback to 서울역
     }
+
+    let matchedTo = STATIONS.find(s => s.id === toId);
+    if (!matchedTo) {
+      let cleanToName = (to.name || "").replace("역", "").trim();
+      if (cleanToName.includes("(")) {
+        cleanToName = cleanToName.split("(")[0].trim();
+      }
+      matchedTo = STATIONS.find(s => s.name === cleanToName);
+      if (!matchedTo) {
+        matchedTo = STATIONS.find(s => s.name.startsWith(cleanToName) || cleanToName.startsWith(s.name));
+      }
+    }
+
+    const formatNameWithStation = (rawName: string) => {
+      let clean = (rawName || "").split("(")[0].trim();
+      return clean.endsWith("역") ? clean : `${clean}역`;
+    };
+
+    if (!matchedFrom) {
+      setIsSearching(false);
+      setSearchError(`출발지 '${formatNameWithStation(from.name)}'은 노선도에서 검색이 불가능한 역명입니다. 철자법 또는 수도권 노선을 가리키는지 다시 확인해 주세요.`);
+      setRoutes([]);
+      setSelectedRoute(null);
+      return;
+    }
+
+    if (!matchedTo) {
+      setIsSearching(false);
+      setSearchError(`도착지 '${formatNameWithStation(to.name)}'은 노선도에서 검색이 불가능한 역명입니다. 철자법 또는 수도권 노선을 가리키는지 다시 확인해 주세요.`);
+      setRoutes([]);
+      setSelectedRoute(null);
+      return;
+    }
+
+    if (matchedFrom.name === matchedTo.name) {
+      setIsSearching(false);
+      setSearchError("출발지(역)와 목적지(역)가 동일합니다. 서로 다른 명칭의 역을 지정해 주세요.");
+      setRoutes([]);
+      setSelectedRoute(null);
+      return;
+    }
+
+    fromId = matchedFrom.id;
+    toId = matchedTo.id;
 
     setIsSearching(true);
     setSearchError("");

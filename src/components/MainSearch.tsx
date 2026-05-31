@@ -307,6 +307,14 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
 
   return (
     <div id="main-search-card" className="bg-[#111114] rounded-2xl border border-white/10 p-5 mb-4">
+      {/* 🛑 역 검색 관련 경고 공지사항 (네비게이션 부제 명시) */}
+      <div className="mb-4 bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-3 flex items-start gap-2.5">
+        <AlertCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+        <div className="text-[11px] text-slate-300 leading-relaxed font-medium">
+          <span className="text-emerald-400 font-bold">안내:</span> 아직은 외부 장소 네비게이션 기능이 지원되지 않으므로, <span className="underline decoration-emerald-500/40 font-bold text-white">반드시 정확한 '지하철 역 네이밍'만 입력</span>해 주셔야 정상적인 경로 길찾기가 제공됩니다. (예: 강남, 사당, 서울역)
+        </div>
+      </div>
+
       {/* 1. 상단 두 역 입력 필드 및 스왑 버튼 (줄바꿈 결합 제거로 겹침 100% 원천 방지) */}
       <div className="relative flex flex-col gap-3 mb-4">
         {/* 출발역 Row */}
@@ -319,7 +327,7 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
             <input
               id="input-from-station"
               type="text"
-              placeholder="출발역 또는 장소 입력 (예: 강남)"
+              placeholder="출발역"
               value={fromQuery}
               onFocus={() => setActiveInput("FROM")}
               onChange={(e) => handleQueryChange(e.target.value, "FROM")}
@@ -357,7 +365,7 @@ export default function MainSearch({ onSearchRoute, stationsList }: MainSearchPr
             <input
               id="input-to-station"
               type="text"
-              placeholder="도착역 또는 박물관/숭례문 등 장소 입력"
+              placeholder="도착역"
               value={toQuery}
               onFocus={() => setActiveInput("TO")}
               onChange={(e) => handleQueryChange(e.target.value, "TO")}
